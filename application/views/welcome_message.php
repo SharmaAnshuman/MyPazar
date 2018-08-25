@@ -1,91 +1,94 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>Welcome to CodeIgniter</title>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<style type="text/css">
+    <!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="<?php echo base_url("assets/css/bootstrap.min.css"); ?>" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+	<link rel="stylesheet" href="<?php echo base_url("assets/css/custom.css"); ?>" />
 
-	::selection{ background-color: #E13300; color: white; }
-	::moz-selection{ background-color: #E13300; color: white; }
-	::webkit-selection{ background-color: #E13300; color: white; }
-
-	body {
-		background-color: #fff;
-		margin: 40px;
-		font: 13px/20px normal Helvetica, Arial, sans-serif;
-		color: #4F5155;
-	}
-
-	a {
-		color: #003399;
-		background-color: transparent;
-		font-weight: normal;
-	}
-
-	h1 {
-		color: #444;
-		background-color: transparent;
-		border-bottom: 1px solid #D0D0D0;
-		font-size: 19px;
-		font-weight: normal;
-		margin: 0 0 14px 0;
-		padding: 14px 15px 10px 15px;
-	}
-
-	code {
-		font-family: Consolas, Monaco, Courier New, Courier, monospace;
-		font-size: 12px;
-		background-color: #f9f9f9;
-		border: 1px solid #D0D0D0;
-		color: #002166;
-		display: block;
-		margin: 14px 0 14px 0;
-		padding: 12px 10px 12px 10px;
-	}
-
-	#body{
-		margin: 0 15px 0 15px;
-	}
+    <title>MyPazar</title>
+  </head>
+  <body class="bg-dark">
+    <?php  $this->load->view('include/navbar'); ?>
 	
-	p.footer{
-		text-align: right;
-		font-size: 11px;
-		border-top: 1px solid #D0D0D0;
-		line-height: 32px;
-		padding: 0 10px 0 10px;
-		margin: 20px 0 0 0;
-	}
-	
-	#container{
-		margin: 10px;
-		border: 1px solid #D0D0D0;
-		-webkit-box-shadow: 0 0 8px #D0D0D0;
-	}
-	</style>
-</head>
-<body>
-
-<div id="container">
-	<h1>Welcome to CodeIgniter!</h1>
-
-	<div id="body">
-		<p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
-
-		<p>If you would like to edit this page you'll find it located at:</p>
-		<code>application/views/welcome_message.php</code>
-
-		<p>The corresponding controller for this page is found at:</p>
-		<code>application/controllers/welcome.php</code>
-
-		<p>If you are exploring CodeIgniter for the very first time, you should start by reading the <a href="user_guide/">User Guide</a>.</p>
+	<div class="container">
+		<div class="col-md-4 offset-md-4">
+			<div class="input-group e-search-bar mb-4">
+				<input type="text" class="form-control" placeholder="Search">
+				<div class="input-group-append">
+					<button class="btn btn-info fa fa-search" type="button"></button>
+				</div>
+			</div>
+		</div>
 	</div>
-        
-	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
-</div>
 
-</body>
+	<!-- carousel -->
+	<div class="container mb-4">
+		<div class="carousel slide" data-ride="carousel">
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+				<img height="350px" class="w-100" src="https://cdn3-offer.paytm.com/wp-content/uploads/2017/09/760x500-8.jpg" alt="First slide">
+				</div>
+				<div class="carousel-item">
+				<img height="350px" class="w-100" src="https://cdn3-offer.paytm.com/wp-content/uploads/2017/02/760x500-1.jpg" alt="Second slide">
+				</div>
+				<div class="carousel-item">
+				<img height="350px" class="w-100" src="https://cdn2-offer.paytm.com/wp-content/uploads/2016/12/760X500.jpg" alt="Third slide">
+				</div>
+			</div>
+			<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="sr-only">Previous</span>
+			</a>
+			<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="sr-only">Next</span>
+			</a>
+		</div>
+	</div>
 
+
+	<div class="container">
+		<div class="row">
+
+			<div class="card" style="width: 18rem;">
+				<div class="card-body">
+					<img src="https:\/\/res.cloudinary.com\/dc4bqmdjz\/image\/upload\/v1513837533\/evidmfpsxgxwlfkpu25m.jpg" class="e-marketplace-logo"/>
+					<h5 class="card-title">Paytm</h5>
+					<h6 class="card-subtitle mb-2 text-muted">Rs. 300 Off on Minimum Purchase of Rs. 499 (New User)</h6>
+					<p class="card-text">Get Rs. 300 off on minimum purchase of Rs. 499. Offer valid for select products displayed on the landing page. Offer valid for new users.</p>
+					<a href="#" class="card-link">Show Coupons</a>
+					<a href="#" class="card-link"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a>
+					<a href="#" class="card-link"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></a>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="<?php echo base_url("assets/js/jquery-3.2.1.slim.min.js"); ?>"></script>
+	<script src="<?php echo base_url("assets/js/popper.min.js"); ?>"></script>
+	<script src="<?php echo base_url("assets/js/bootstrap.min.js"); ?>"></script>
+  </body>
 </html>
+<!-- <a href="<?=  base_url('next') ?>">Next Page</a> 
 
-<a href="<?=  base_url('./next') ?>">Next Page</a>
+{   "id":"1",
+	"title":"Rs. 300 Off on Minimum Purchase of Rs. 499 (New User)",
+	"description":"Get Rs. 300 off on minimum purchase of Rs. 499. Offer valid for select products displayed on the landing page. Offer valid for new users.",
+	"verified_at":"2018-03-14 04:55:45",
+	"expires_at":"2018-12-31 18:30:00",
+	"coupon_code":"MYNTRANEW300",
+	"store_name":"Myntra",
+	"store_tag":"myntra",
+	"category_name":"Fashion",
+	"category_tag":"fashion",
+	"store_url":"https:\/\/www.myntra.com\/",
+	"store_image":"https:\/\/res.cloudinary.com\/dc4bqmdjz\/image\/upload\/v1513837533\/evidmfpsxgxwlfkpu25m.jpg"}
+-->

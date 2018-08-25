@@ -1,0 +1,11 @@
+.e-search-bar{
+    padding: 7px;
+    background-color: #17a2b838;
+    border-radius: 8px;
+}
+
+.e-marketplace-logo{
+    height: 32px;
+    width: 40px;
+    float: right;
+}
