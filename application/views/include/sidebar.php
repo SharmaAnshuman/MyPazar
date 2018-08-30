@@ -8,5 +8,8 @@
           <form class="form-inline" action="home_c/search">
               <input class="form-control mr-sm-2" type="search" name="search_token" placeholder="Search" aria-label="Search">
               <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+              <small id="passwordHelpBlock" class="form-text text-muted">
+              Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+            </small>
           </form>
            <hr class="bg-dark"/>

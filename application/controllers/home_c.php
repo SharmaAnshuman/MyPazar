@@ -16,26 +16,56 @@ class Home_c extends CI_Controller{
 
     function index()
     {
-    	//PageConfig
-    	$data['pageTitle'] = 'Home';
+        //Page
+        $data['pageTitle'] = 'Home';
 
-    	$this->load->model('home_m');
-    	$data['eCoupons'] = $this->home_m->get_last_ten_entries();
-    	// $this->load->view('include/navbar');
+        //DB
+        $this->load->model('coupons_m');
+        $data['eCoupons'] = $this->coupons_m->getLastTenEntries();
+
+        //View
+        $this->load->view('include/navbar');
         $this->load->view('home_v',$data);
-    	// $this->load->view('include/footer');
+        $this->load->view('include/footer');
     }
 
     function search()
     {
-    	//PageConfig
-    	$data['pageTitle'] = 'Search';
+        //Page
+        $data['pageTitle'] = 'Search';
+        $data['search_token'] =  $this->load->post('search_token');
 
-    	$this->load->model('home_m');
-    	// $data['eCoupons'] = $this->home_m->get_last_ten_entries();
-    	// $this->load->view('include/navbar');
-    	$data['search_token'] =  $this->load->post('search_token');
-        $this->load->view('home_v',$data);
-    	// $this->load->view('include/footer');
+        //DB
+        $this->load->model('coupons_m');
+        $searchResult = $this->coupons_m->searchCoupons($this->load->post('search_token'));
+        if($searchResult != False)
+            $data['searchResult'] = $searchResult ;
+        else
+            $data['error'] = " ' <b>".$this->load->post('search_token')."</b> ' related coupon not found";
+
+        //View
+        $this->load->view('include/navbar');
+        $this->load->view('search_v',$data);
+        $this->load->view('include/footer');
+    }
+
+    function showCoupon($couponID){
+
+        //DB
+        $this->load->model('coupons_m');
+        $couponCodeData = $this->coupons_m->showCoupon($couponID);
+        if($couponCodeData != False)
+            $data['couponCode'] = $couponCodeData;
+        else
+            $data['error'] = " ' <b>".$couponCodeData."</b> ' related coupon code not found";
+
+        //Page
+        $data['pageTitle'] = "Coupon Code";
+
+        //View
+        $this->load->view('include/navbar');
+        $this->load->view('showcoupon_v',$data);
+        $this->load->view('include/footer');
+
     }
 }

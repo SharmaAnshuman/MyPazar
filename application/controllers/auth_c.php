@@ -11,14 +11,24 @@
  *
  * @author Sharma Anshuman
  */
-class Home_c extends CI_Controller{
+class Auth_c extends CI_Controller{
     
-    function index()
-    {
-    	$this->load->model('auth_m');
-    	$data['userTokenInfo'] = $this->home_m->getLoginToken();
-    	$this->load->view('include/navbar');
-        $this->load->view('auth_v',$data);
-    	$this->load->view('include/footer');
+    function index(){
+
+        //View
+        $data['pageTitle'] = "Login";
+
+        //DB
+        $this->load->model('auth_m');
+        $data['userTokenInfo'] = $this->auth_m->getLoginToken();
+
+        //View
+        if($data['userTokenInfo'])
+            $this->session->set_userdata($data['userTokenInfo']);
+        else
+            $this->load->view('include/navbar');
+            $this->load->view('auth_v',$data);
+            $this->load->view('include/footer');
     }
+
 }

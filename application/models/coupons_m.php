@@ -17,18 +17,33 @@ class Home_m extends CI_Model {
         parent::__construct();
     }
     
-    function get_last_ten_entries()
+    function getLastTenEntries()
     {
         $query = $this->db->get('coupon', 10);
         return $query->result();
     }
 
-    function getLoginToken()
-    {
-        $u = $this->load->post('username');
-        $p = $this->load->post('password');
-        $this->db->query("select * from userinfo where username = '.$u.' and password = '.$p.' ");
+    function searchCoupons($searchToken){
+        $qry=$this->db->query("select * from coupon where title='".$searchToken."' or marketplace='".$searchToken."'");
+        return $que->num_rows() ? $qry->result() : False;
     }
+
+    function showCoupon($couponID){
+
+        //TODO hide the ID
+        
+        $qry=$this->db->query("select * from coupon where id='".$couponID."'");
+        return $que->num_rows() ? $row->result() : False;
+    }
+
+    function upVote($couponId){
+        
+    }
+
+    function downVote($couponId){
+        
+    }
+
 }
 // <!-- 
 //     function insert_entry()
@@ -51,18 +66,3 @@ class Home_m extends CI_Model {
 
 //         $this->db->update('entries', $this, array('id' => $_POST['id']));
 //     } -->
-
-// }
-
-// <!-- marketplace   
-// -----------
-// id name  url        logo        tag
-// 1  paytm paytm.com  ./logo.png  paytm
-
-// ecoupons
-// -------
-// id m_id code views up down exp_date    verify_date public category_name categoty_tag created_date
-// 1  1    P12S 23    0  1    12/12/2019  12/12/2018  ture   Fashion       fashion      12/08/2018
-// 2  1    DPOK 13    2  1    12/12/2019  12/12/2018  ture   Fashion       fashion      12/08/2018
-
-// select * from ecoupons where created_date -->

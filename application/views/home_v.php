@@ -46,7 +46,7 @@
 									<h5 class="card-title "><?= $coupon->store_name; ?></h5>
 									<h6 class="card-subtitl mb-2"><?= $coupon->title; ?></h6>
 									<p class="card-text"><small><?= substr($coupon->description,0,42).".. <small> Read More</small>"; ?></small></p>
-									<a href="#" class="card-link text-primary">Show Coupons</a>
+									<a href="<?= $coupon->description; ?>" class="card-link text-primary">Show Coupons</a>
 									<a href="#" class="card-link text-primary"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a>
 									<a href="#" class="card-link text-primary"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></a>
 								</div>

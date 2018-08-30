@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="<?php echo base_url("assets/css/bootstrap.min.css"); ?>" />
+	<link rel="stylesheet" href="<?php echo base_url("assets/lib/bootstrap/css/bootstrap.min.css"); ?>" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-	<link rel="stylesheet" href="<?php echo base_url("assets/css/custom.css"); ?>" />
+	<link rel="stylesheet" href="<?php echo base_url("assets/src/css/custom.css"); ?>" />
 
     <title><?php echo $pageTitle; ?> :: eCoupons ::</title>
   </head>
@@ -33,10 +33,14 @@
  -->
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-2">
-    <a class="navbar-brand" href="#" >
-	    <img src="assets/img/logo.svg" width="35" height="35" class="d-inline-block align-top" alt="eCoupons">
-		eCoupons
-	</a>
+  <a class="navbar-brand" href="#" id="brandName" >
+      <img src="assets/img/logo.svg" width="35" height="35" class="d-inline-block align-top" alt="eCoupons">
+    eCoupons
+   </a>
+   <a class="navbar-brand fixed-brand" href="#" >
+      <img src="assets/img/logo.svg" width="35" height="35" class="d-inline-block align-top" alt="eCoupons">
+    eCoupons
+   </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -47,7 +51,7 @@
           <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
+          <a class="nav-link" href="#">Marketplace</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Pricing</a>
