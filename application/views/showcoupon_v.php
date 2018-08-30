@@ -1,7 +1,4 @@
-
-    <?php  $this->load->view('include/navbar'); ?>	
-
-    
+  
 	
 	<div class="container-fluid">
 		<div class="row">
@@ -12,11 +9,13 @@
 
 			<div class="col-md-9">
 				<?php if(!isset($error)){?>
-				<?php foreach($searchResult as $result);?>
+				<?php foreach($couponCode as $result):?>
 				<?php echo $result->title; ?>
+				<?php echo $result->coupon_code; ?>
+				<?php echo $result->store_name; ?>
 				<?php endforeach; }
 				else{
-					echo "<h2 class='bg-danger'>".$searchResult."</h2>";
+					echo "<h2 class='bg-danger'>".$error."</h2>";
 				}?>
 			</div>
 		</div>

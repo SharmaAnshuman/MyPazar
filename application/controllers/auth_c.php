@@ -24,7 +24,7 @@ class Auth_c extends CI_Controller{
 
         //View
         if($data['userTokenInfo'])
-            $this->session->set_userdata($data['userTokenInfo']);
+            // $this->session->set_userdata($data['userTokenInfo']);
         else
             $this->load->view('include/navbar');
             $this->load->view('auth_v',$data);

@@ -12,7 +12,7 @@
 
     <title><?php echo $pageTitle; ?> :: eCoupons ::</title>
   </head>
-  <body class="bg-dark">
+  <body>
 
 
 <!-- Image and text -->
@@ -32,14 +32,13 @@
 </div>
  -->
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-2">
-  <a class="navbar-brand" href="#" id="brandName" >
-      <img src="assets/img/logo.svg" width="35" height="35" class="d-inline-block align-top" alt="eCoupons">
+<nav class="navbar navbar-expand-lg navbar-dark mb-2">
+  <a class="navbar-brand" href="<?php echo base_url(); ?>"  >
+      <img src="<?php echo base_url("assets/src/img/logo.png"); ?>" id="brandName" width="35" height="35" class="d-inline-block align-top" alt="eCoupons">
     eCoupons
    </a>
-   <a class="navbar-brand fixed-brand" href="#" >
-      <img src="assets/img/logo.svg" width="35" height="35" class="d-inline-block align-top" alt="eCoupons">
-    eCoupons
+   <a class="navbar-brand fixed-brand" href="<?php echo base_url(''); ?>" >
+      <img src="<?php echo base_url("assets/src/img/logo.svg"); ?>" width="35" height="35" class="d-inline-block align-top" alt="eCoupons">
    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
