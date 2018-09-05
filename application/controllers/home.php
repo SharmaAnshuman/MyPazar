@@ -18,7 +18,7 @@ class Home extends CI_Controller{
     {
         //DB
         $this->load->model('Vegetable');
-        $data['eCoupons'] = $this->Vegetable->getLastTenEntries();
+        $data['eCoupons'] = $this->Vegetable->get_vegetable();
 
         //Page
         $data['pageTitle'] = 'Home';

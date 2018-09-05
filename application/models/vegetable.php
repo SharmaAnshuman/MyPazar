@@ -5,10 +5,25 @@ class Vegetable extends CI_Model {
     {
         parent::__construct();
     }
-    
-    function getLastTenEntries()
-    {
-        $query = $this->db->get('vegetable', 10);
-        return $query->result();
+
+    function add_vegetable(){
+
     }
+
+	function get_vegetable(){
+        $query = $this->db->get('vegetable');
+        return $query->result();
+	}
+
+	function update_vegetable(){
+
+	}
+
+	function delete_vegetable(){
+
+	}
+
+	function upload_vegetable_img(){
+
+	}
 }   

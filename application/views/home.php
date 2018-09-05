@@ -18,6 +18,7 @@
 									<a class="card-link text-primary" data-toggle="modal" data-target="#exampleModal<?= $coupon->id ?>"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add To Cart</a>
 							<!-- Modal -->
 									<div class="modal fade" id="exampleModal<?= $coupon->id ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+									<form action="cart/check">
 									  <div class="modal-dialog" role="document">
 									    <div class="modal-content">
 									      <div class="modal-header">
@@ -27,32 +28,34 @@
 									        </button>
 									      </div>
 									      <div class="modal-body">
-									        <table class="table table-bordered">
-									        	<tr>
-									        		<th>Name</th>
-									        		<th>Qty</th>
-									        		<th>Type</th>
-									        	</tr>
-									        	<tr>
-									        		<td><center><img src='<?php echo base_url("assets/src/img/$coupon->img"); ?>' height="55px" width="55px"/></center><small class="card-title "><?= $coupon->name; ?></small></td>
-									        		<td>
-									        			<input type="number" name="qty" value="1" class="form-control"/>
-									        		</td>
-									        		<td>
-									        			<select class="form-control-sm">
-									        				<option>kg</option>
-									        				<option>gm</option>
-									        			</select>
-									        		</td>
-									        	</tr>
-									        </table>
+									      		<div class="alert alert-danger" role="alert"></div>
+										        <table class="table table-bordered">
+										        	<tr>
+										        		<th>Name</th>
+										        		<th>Qty</th>
+										        		<th>Type</th>
+										        	</tr>
+										        	<tr>
+										        		<td><center><img src='<?php echo base_url("assets/src/img/$coupon->img"); ?>' height="55px" width="55px"/></center><small class="card-title "><?= $coupon->name; ?></small></td>
+										        		<td>
+										        			<input type="number" name="qty" value="1" class="form-control"  min="1" max="60" step="1"/>
+										        		</td>
+										        		<td>
+										        			<select class="form-control-sm" id="modeOfQty">
+										        				<option value="kg">kg</option>
+										        				<option value="gm">gm</option>
+										        			</select>
+										        		</td>
+										        	</tr>
+										        </table>
 									      </div>
 									      <div class="modal-footer">
 									        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-									        <button type="button" class="btn btn-primary">Add To Cart</button>
+									        <button type="submit" class="btn btn-primary">Add To Cart</button>
 									      </div>
 									    </div>
 									  </div>
+									</form>
 									</div>
 									<!-- Model -->
 								</div>
