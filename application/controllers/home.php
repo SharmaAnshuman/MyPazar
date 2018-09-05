@@ -34,15 +34,14 @@ class Home extends CI_Controller{
         //DB
         $this->load->model('userinfo');
         if($this->userinfo->getUserInfo("ashu123","ashu123")){
-            echo "<pre>";
-                print_r($this->session->userdata(userData));
-            echo "</pre>";
-            //Page
-            $data['pageTitle'] = 'Welcome MyAccount';
-            //View
-            $this->load->view('include/navbar',$data);
-            $this->load->view('myaccount');
-            $this->load->view('include/footer');
+            if(1){
+                //Page
+                $data['pageTitle'] = 'Welcome  MyAccount';
+                //View
+                $this->load->view('include/navbar',$data);
+                $this->load->view('myaccount');
+                $this->load->view('include/footer');
+            }
         }else{
             //Page
             $data['pageTitle'] = 'MyAccount';
@@ -51,6 +50,17 @@ class Home extends CI_Controller{
             $this->load->view('myaccount');
             $this->load->view('include/footer');
         }
+
+    }
+
+    function cart(){
+        //Page
+        $data['pageTitle'] = 'My Cart';
+
+        //View
+        $this->load->view('include/navbar');
+        $this->load->view('cart',$data);
+        $this->load->view('include/footer');
 
     }
 

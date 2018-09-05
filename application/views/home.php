@@ -30,13 +30,11 @@
 									        <table class="table table-bordered">
 									        	<tr>
 									        		<th>Name</th>
-									        		<th>Picture</th>
 									        		<th>Qty</th>
 									        		<th>Type</th>
 									        	</tr>
 									        	<tr>
-									        		<td><center><img src='<?php echo base_url("assets/src/img/$coupon->img"); ?>' height="55px" width="55px"/></center></td>
-									        		<td><small class="card-title "><?= $coupon->name; ?></small></td>
+									        		<td><center><img src='<?php echo base_url("assets/src/img/$coupon->img"); ?>' height="55px" width="55px"/></center><small class="card-title "><?= $coupon->name; ?></small></td>
 									        		<td>
 									        			<input type="number" name="qty" value="1" class="form-control"/>
 									        		</td>

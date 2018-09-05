@@ -22,7 +22,12 @@
    <a class="navbar-brand fixed-brand" href="<?php echo base_url(''); ?>" >
       <img src="<?php echo base_url("assets/src/img/logo.svg"); ?>" width="35" height="35" class="d-inline-block align-top" alt="eCoupons">
    </a>
+   <div>
     <a  href="<?php echo base_url('/home/myaccount'); ?>" class="text-white d-lg-none btn btn-outline-info">
       <span class="fa fa-user"></span>
     </a>
+    <a  href="<?php echo base_url('/home/cart'); ?>" class="text-white d-lg-none btn btn-outline-info">
+      <span class="fa fa-shopping-cart"></span>
+    </a>
+  </div>
   </nav>
