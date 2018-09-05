@@ -11,23 +11,47 @@
  *
  * @author Sharma Anshuman
  */
-class Home_c extends CI_Controller{
+class Home extends CI_Controller{
     
 
     function index()
     {
-
         //DB
-        $this->load->model('coupons_m');
-        $data['eCoupons'] = $this->coupons_m->getLastTenEntries();
+        $this->load->model('Vegetable');
+        $data['eCoupons'] = $this->Vegetable->getLastTenEntries();
 
         //Page
         $data['pageTitle'] = 'Home';
 
         //View
         $this->load->view('include/navbar',$data);
-        $this->load->view('home_v',$data);
+        $this->load->view('home',$data);
         $this->load->view('include/footer');
+    }
+
+    function myaccount()
+    {
+        //DB
+        $this->load->model('userinfo');
+        if($this->userinfo->getUserInfo("ashu123","ashu123")){
+            echo "<pre>";
+                print_r($this->session->userdata(userData));
+            echo "</pre>";
+            //Page
+            $data['pageTitle'] = 'Welcome MyAccount';
+            //View
+            $this->load->view('include/navbar',$data);
+            $this->load->view('myaccount');
+            $this->load->view('include/footer');
+        }else{
+            //Page
+            $data['pageTitle'] = 'MyAccount';
+            //View
+            $this->load->view('include/navbar',$data);
+            $this->load->view('myaccount');
+            $this->load->view('include/footer');
+        }
+
     }
 
     function search()
