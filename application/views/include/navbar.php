@@ -7,8 +7,9 @@
 
     <!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="<?php echo base_url("assets/lib/bootstrap/css/bootstrap.min.css"); ?>" />
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+	<link rel="stylesheet" href="<?php echo base_url("assets/lib/font-awesome/css/font-awesome.css"); ?>" />
 	<link rel="stylesheet" href="<?php echo base_url("assets/src/css/custom.css"); ?>" />
+  <script src="<?php echo base_url("assets/lib/bootstrap/js/jquery.min.js"); ?>"></script>
 
     <title><?php echo $pageTitle; ?> :: eSabji ::</title>
   </head>
@@ -23,7 +24,7 @@
       <img src="<?php echo base_url("assets/src/img/logo.svg"); ?>" width="35" height="35" class="d-inline-block align-top" alt="eCoupons">
    </a>
    <div>
-    <a  href="<?php echo base_url('/home/myaccount'); ?>" class="text-white d-lg-none btn btn-outline-info">
+    <a  href="<?php echo base_url('/myaccount'); ?>" class="text-white d-lg-none btn btn-outline-info">
       <span class="fa fa-user"></span>
     </a>
     <a  href="<?php echo base_url('/home/cart'); ?>" class="text-white d-lg-none btn btn-outline-info">

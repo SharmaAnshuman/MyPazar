@@ -2,68 +2,28 @@
 	
 	<div class="container-fluid">
 		<div class="row">
-
 			<div class="col-md-12">
-				
-
-					<div class="row">
-					<?php foreach($eCoupons as $coupon): ?>
+				<div class="row">
+					<?php foreach($products as $product_item): ?>
 						<div class="col-md-4">
 							<div class="card text-muted mb-2">
 								<div class="card-body bg-white">
-									<center><img src='<?php echo base_url("assets/src/img/$coupon->img"); ?>' height="125px" width="125px"/></center>
-									<h5 class="card-title "><?= $coupon->name; ?></h5>
-									<!-- <h6 class="card-subtitl mb-2"><?= $coupon->qty; ?></h6> -->
-									<p class="card-text"><small><?= substr($coupon->info,0,42); ?></small></p>
-									<a class="card-link text-primary" data-toggle="modal" data-target="#exampleModal<?= $coupon->id ?>"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add To Cart</a>
-							<!-- Modal -->
-									<div class="modal fade" id="exampleModal<?= $coupon->id ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-									<form action="cart/check">
-									  <div class="modal-dialog" role="document">
-									    <div class="modal-content">
-									      <div class="modal-header">
-									        <h5 class="modal-title" id="exampleModalLabel">eCart</h5>
-									        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									          <span aria-hidden="true">&times;</span>
-									        </button>
-									      </div>
-									      <div class="modal-body">
-									      		<div class="alert alert-danger" role="alert"></div>
-										        <table class="table table-bordered">
-										        	<tr>
-										        		<th>Name</th>
-										        		<th>Qty</th>
-										        		<th>Type</th>
-										        	</tr>
-										        	<tr>
-										        		<td><center><img src='<?php echo base_url("assets/src/img/$coupon->img"); ?>' height="55px" width="55px"/></center><small class="card-title "><?= $coupon->name; ?></small></td>
-										        		<td>
-										        			<input type="number" name="qty" value="1" class="form-control"  min="1" max="60" step="1"/>
-										        		</td>
-										        		<td>
-										        			<select class="form-control-sm" id="modeOfQty">
-										        				<option value="kg">kg</option>
-										        				<option value="gm">gm</option>
-										        			</select>
-										        		</td>
-										        	</tr>
-										        </table>
-									      </div>
-									      <div class="modal-footer">
-									        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-									        <button type="submit" class="btn btn-primary">Add To Cart</button>
-									      </div>
-									    </div>
-									  </div>
-									</form>
-									</div>
-									<!-- Model -->
+									<center><img src='<?php echo base_url("assets/src/img/$product_item->img"); ?>' height="125px" width="125px"/></center>
+									<h5 class="card-title "><?= $product_item->name; ?></h5>
+									<p class="card-text"><small><?= substr($product_item->info,0,42); ?></small></p>
+									<small>250g Rs.20 </small><br/>
+									<small>500g Rs.30 40% discount</small><br/>
+									<small>1kg  Rs.40 50% discount</small><br/>
+									<hr>
+									<input type="number" name="">
+									<a class="card-link text-primary" data-toggle="modal" data-target="#add_to_cart_model" data-product="<?= $product_item->id ?>" id="btn_add_to_cart">
+											<i class="fa fa-cart-plus" aria-hidden="true"></i> Add To Cart
+									</a>
 								</div>
 							</div>
 						</div>
 					<?php endforeach; ?>
-					</div>
+				</div>
 			</div>
-
 		</div>
 	</div>

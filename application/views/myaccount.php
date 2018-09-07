@@ -1,18 +1,8 @@
-
-<form class="p-4" action="myaccount">
-  <div class="form-group">
-    <label for="email">Email address</label>
-    <input type="email" id="email" class="form-control" placeholder="email@example.com">
-  </div>
-  <div class="form-group">
-    <label for="password">Password</label>
-    <input type="password" id="password" class="form-control" placeholder="Password">
-  </div>
-  <div class="form-check">
-    <input type="checkbox" class="form-check-input" id="rememberCheck">
-    <label class="form-check-label" for="rememberCheck">
-      Remember me
-    </label>
-  </div>
-  <button type="submit" class="btn btn-primary">Sign in</button>
-</form>
+<a href=""><i class="fa fa-shopping-basket fa-4" aria-hidden="true"></i> Cart</a>
+<a href=""><i class="fa fa-shopping-bag fa-4" aria-hidden="true"></i> Order</a>
+<a href=""><i class="fa fa-truck fa-4" aria-hidden="true"></i> Delivered</a>
+<a href=""><i class="fa fa-road fa-4" aria-hidden="true"></i> Un-Delivered</a>
+<a href=""><i class="fa fa-wrench fa-4" aria-hidden="true"></i> Setting</a>
+<a href=""><i class="fa fa-newspaper-o fa-4" aria-hidden="true"></i> Bills</a>
+<a href=""><i class="fa fa-money fa-4" aria-hidden="true"></i> Paid</a>
+<a href=""><i class="fa fa-hourglass-3 fa-4" aria-hidden="true"></i> Un-Paid</a>

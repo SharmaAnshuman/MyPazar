@@ -25,7 +25,10 @@ class Order extends CI_Model {
         $this->db->insert('order', $this);
     }
 
-    function showCart(){
+    function get_cart_count(){
+    }
+
+    function set_cart_count(){
     }
 
     function update_incart(){
