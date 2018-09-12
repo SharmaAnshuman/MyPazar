@@ -17,7 +17,7 @@ class Myaccount extends CI_Controller{
 
     function index()
     {
-        if(isset($_SESSION['userdata'])){
+        if(isset($this->session->userdata('userData')[0]->name)){
             //Page
             $data['pageTitle'] = 'MyAccount';
 
@@ -40,22 +40,49 @@ class Myaccount extends CI_Controller{
 
     function login(){
         # Get Requested Information
-        $user = $this->input->post('user');
-        $pass = $this->input->post('user');
+        $user = $this->input->post('username');
+        $pass = $this->input->post('password');
         $btn = $this->input->post('btn_signin');
         if($btn != "Guset Login"){
             # Vaildation Of Request
             $this->load->model('Users');
-            $result =  $this->Users->check_auth($user,$pass);
-            if($result){
-                $this->session->set_userdata("userdata",$result);
-            }else{
-                $this->error="Login Failed...";
+            if($user != "" && $pass != ""){
+                $result =  $this->Users->check_auth($user,$pass);
+                if($result){
+                    $this->session->set_userdata("userData",$result);
+                    redirect('home');
+                }else{
+                    $this->error="Login Failed...";
+                }
             }
-            $this->index();
         }else{
-            
+
+            //Page
+            $data['pageTitle'] = 'Guset Login';
+            $data['error'] = $this->error;
+
+            //View
+            $this->load->view('include/navbar',$data);
+            $this->load->view('guset_login',$data);
+            $this->load->view('include/footer');   
+
         }
+        //redirect('home');
+    }
+
+    function guset_login(){
+
+        $name = $this->input->post('name');
+        $mobile = $this->input->post('mobile`');
+        $pass = $this->input->post('password');
+        $address = $this->input->post('address');
+
+        
+    }
+
+    function logout(){
+        $this->session->sess_destroy();
+        redirect('home');
     }
 
 }

@@ -7,16 +7,20 @@ class Users extends CI_Model {
     }
 
     function check_auth($user,$pass){
-        $query = $this->db->get_where('users', array('username' => '$user', 'password' => '$pass'));
-        if($query->num_rows() == 1){
-            return $query->result();
-        }else{
-            return false;
+        if($user != "" && $pass != "")
+        {
+            $query = $this->db->query("select * from users where `username` = '$user' and `password` = '$pass'");
+            if($query->num_rows() == 1){
+                return $query->result();
+            }else{
+                return false;
+            }
         }
+        return false;
     }
 
     function get_auth_token(){
-        if(isset($_SESSION['userdata']))
+        if(isset($_SESSION['userID']))
             return true;
         else
             return false;

@@ -2,11 +2,11 @@
 <form class="p-4" action="myaccount/login" method="POST">
   <div class="form-group">
     <label for="email">Email address</label>
-    <input type="text" id="email" class="form-control" placeholder="email@example.com">
+    <input type="text" id="email" name="username" class="form-control" placeholder="email@example.com">
   </div>
   <div class="form-group">
     <label for="password">Password</label>
-    <input type="password" id="password" class="form-control" placeholder="Password">
+    <input type="password" id="password" name="password" class="form-control" placeholder="Password">
   </div>
   <div class="form-check">
     <input type="checkbox" class="form-check-input" id="rememberCheck">
