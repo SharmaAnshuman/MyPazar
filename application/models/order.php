@@ -80,19 +80,15 @@ class Order extends CI_Model {
 
     }
 
-    function remove_incart(){
-        
+    function make_order($order_id){
+        $this->status = "order";
+        $this->updated_at = date('d/m/Y h:m:s');
+        $this->db->where("id", $order_id);
+        $this->db->update('myorder', $this);        
     }
 
     function get_order_info(){
 
     }
 
-    function generate_order_id(){
-
-    }
-
-    function place_order(){
-
-    }
 }   

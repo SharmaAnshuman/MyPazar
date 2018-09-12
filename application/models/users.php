@@ -1,6 +1,9 @@
 <?php 
 class Users extends CI_Model {
 
+    var $user = null;
+    var $pass = null;
+
     function __construct()
     {
         parent::__construct();
@@ -26,11 +29,21 @@ class Users extends CI_Model {
             return false;
     }
 
-    function add_user(){
+    function add_guset_user($user,$pass){
 
+        $this->user = $user;
+        $this->pass = $pass;
+        $this->type = "Guset";
+
+        $result = $this->db->insert('Users', $this);
+        if($result){
+            return $result->id;
+        }else{
+            return false;
+        }
     }
 
-    function add_guset_user(){
+    function add_user(){
 
     }
 

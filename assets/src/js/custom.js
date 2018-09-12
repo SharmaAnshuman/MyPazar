@@ -77,7 +77,7 @@
           });
         }
       }
-
+//--- TO DELETE ---
       // function addQty(self,opertion){
       //   var $btn = $(self);
       //   var $qty = $btn.parent().find("#qty");

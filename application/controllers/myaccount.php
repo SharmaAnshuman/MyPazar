@@ -70,13 +70,24 @@ class Myaccount extends CI_Controller{
         //redirect('home');
     }
 
-    function guset_login(){
+    function guset_order($order_id){
 
         $name = $this->input->post('name');
         $mobile = $this->input->post('mobile`');
         $pass = $this->input->post('password');
         $address = $this->input->post('address');
+        $UID = $this->Users->add_guset_user($mobile, $pass);
+        if($UID != false)
+            $AID = $this->Address->set_user_address($UID, $address);
+        if($AID != false)
+            $this->Order->make_order($order_id);
+        
+        $data['pageTitle'] = "Address";
+        $data['error'] = "you can get order details using Login: ".$mobile." and Password: ".$password;
 
+        $this->load->view('include/navbar',$data);
+        $this->load->view('thankyou',$data);
+        $this->load->view('include/footer',$data);
         
     }
 

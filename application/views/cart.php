@@ -2,13 +2,15 @@
         if(!$in_cart_items){
         	echo "<center><i class='fa fa-shopping-basket' aria-hidden='true'></i>Your Cart is empty</center>";
         }else{
+
+        $this->session->set_userdata("order_id",$in_cart_items[0]->order_id);
 ?>
 <table class="table" >
 	<th>Item</th>
 	<th>Qty</th>
 	<th>Amount</th>
 	<?php $total = 0; ?>
-	<center 	>Order ID: <small><?= $in_cart_items[0]->order_id ?></small></center>
+	<!-- <center 	>Order ID: <small><?= $in_cart_items[0]->order_id ?></small></center> -->
 	<?php foreach($in_cart_items as $item):?>
 	<tr>
 		<td><center><img src='<?php echo base_url("assets/src/img/$item->img"); ?>' height="55px" width="55px"/><br/><?= $item->name ?></center></td>
@@ -24,7 +26,7 @@
 		</td>
 	</tr>
 </table>
-			<a href="/home/place_order/<?= $in_cart_items[0]->order_id ?>" class="btn btn-warning text-white col-10 ml-4 ">Place Order</a>
+			<a href="/home/place_order" class="btn btn-warning text-white col-10 ml-4 ">Place Order</a>
 
 <?php
 	}

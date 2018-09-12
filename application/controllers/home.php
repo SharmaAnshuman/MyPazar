@@ -55,38 +55,49 @@ class Home extends CI_Controller{
         $this->load->view('include/footer',$data);
     }
 
-    function place_order($order_id){
+    function place_order(){
+        
         $this->load->model("Order");
+        $this->load->model("Users");
+        $this->load->model("Address");
 
+        $order_id = $this->session->userdata("order_id");
         $result = $this->Order->get_mycart();
+        
         if(!empty($result)){
             if (strpos($result[0]->UID, "guset_") !== false) {
-                
-                $data['pageTitle'] = "Guset Place Order";
-                $data['error'] = "";
+
+                $data['pageTitle'] = "Address";
+                $data['order_id'] = $order_id;
+                $data['error'] = "Please provide us where to deliver order.";
+
                 $this->load->view('include/navbar',$data);
-                $this->load->view('guset_login',$data);
+                $this->load->view('guset_order',$data);
                 $this->load->view('include/footer',$data);
 
+
             }else{
-                echo "user  :";
+                $userData = $this->session->userdata('userData')[0];
+                if (isset($userData->name)) {
+                    $this->Order->make_order($order_id);
+                }else{
+                    echo "Please login..";
+                }
             }
         }else{
 
             echo "404 ERROR";
 
         }
-        // if($result[0]->UID){
-        //     //guset
-        //     1 add guset user
-        //     2 now place_order with orignal uid
-        // }else{
-        //     // user
-        //     1 not login goto login
-        //     2 update guset uid => user uid
-        //     3 now place_order with orignal uid
-        // }
+    }
 
-
+    function generateRandomString($length = 4) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
     }
 }

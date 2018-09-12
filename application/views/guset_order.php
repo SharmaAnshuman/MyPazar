@@ -25,7 +25,7 @@
 
 	});	 
 </script>
-<form class="p-4" action="myaccount/guset_login" method="POST">
+<form class="p-4" action="myaccount/guset_order/<?= $order_id ?>" method="POST">
   <div class="form-group">
   	<label for="name">Full Name</label>
     <input type="text" id="name" name="name" class="form-control" placeholder="Full Name">
@@ -36,5 +36,5 @@
     <label for="address">Address</label>
     <textarea id="address" name="address" class="form-control" placeholder="Address"></textarea>
   </div>
-  <button type="submit" class="btn btn-primary" name="btn_signin" value="Guset Login">Sign in as Guset</button>
+  <button type="submit" class="btn btn-primary" name="btn_signin" value="guset order">Confim Order</button>
 </form>
