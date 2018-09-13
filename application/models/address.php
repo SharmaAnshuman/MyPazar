@@ -1,6 +1,9 @@
 <?php 
 class Address extends CI_Model {
 
+    var $UID = null;
+    var $house_name = null;
+
     function __construct(){
 
         parent::__construct();
@@ -16,9 +19,25 @@ class Address extends CI_Model {
 
     function set_user_address($uid,$address){
 
-        $query = $this->db->query("insert into address (id,UID,address) values (null,'".$this->session->userdata("userData")[0]->id."','".$address."'");
-        $row = $query->result();
-        return "return NEW AID";
+        $data = array(
+            'UID' => $uid ,
+            'house_name' => $address,
+            'house_no' => $address,
+            'road_name' => $address,
+            'socity_name' => $address,
+            'area_name' => $address,
+            'nearby' => $address,
+            'is_active'=> 'Y',
+            'created_at' => date('dmY h:m:s'),
+            'updated_at' => ' ',
+         );
+        
+        $result = $this->db->insert('address', $data);
+        if($result){
+            return $this->db->insert_id();
+        }else{
+            return false;
+        }
 
     }
 }   

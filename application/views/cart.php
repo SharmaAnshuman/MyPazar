@@ -2,7 +2,6 @@
         if(!$in_cart_items){
         	echo "<center><i class='fa fa-shopping-basket' aria-hidden='true'></i>Your Cart is empty</center>";
         }else{
-
         $this->session->set_userdata("order_id",$in_cart_items[0]->order_id);
 ?>
 <table class="table" >
@@ -26,7 +25,7 @@
 		</td>
 	</tr>
 </table>
-			<a href="/home/place_order" class="btn btn-warning text-white col-10 ml-4 ">Place Order</a>
+			<a href="<?php echo base_url('/home/place_order'); ?>" class="btn btn-warning text-white col-10 ml-4 ">Place Order</a>
 
 <?php
 	}

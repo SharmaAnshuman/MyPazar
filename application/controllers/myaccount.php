@@ -70,30 +70,53 @@ class Myaccount extends CI_Controller{
         //redirect('home');
     }
 
-    function guset_order($order_id){
+    function guset_order(){
 
         $name = $this->input->post('name');
-        $mobile = $this->input->post('mobile`');
+        $email = $this->input->post('email');
+        $mobile = $this->input->post('mobile');
         $pass = $this->input->post('password');
         $address = $this->input->post('address');
-        $UID = $this->Users->add_guset_user($mobile, $pass);
+        $order_id = $this->session->userdata("order_id");
+
+        $this->load->model('Users');
+        $this->load->model('Address');
+        $this->load->model('Order');
+
+        $UID = $this->Users->add_guset_user($name,$email,$mobile,$pass);
         if($UID != false)
             $AID = $this->Address->set_user_address($UID, $address);
         if($AID != false)
-            $this->Order->make_order($order_id);
-        
-        $data['pageTitle'] = "Address";
-        $data['error'] = "you can get order details using Login: ".$mobile." and Password: ".$password;
+            if($this->Order->make_order($order_id,$UID)){
 
-        $this->load->view('include/navbar',$data);
-        $this->load->view('thankyou',$data);
-        $this->load->view('include/footer',$data);
-        
+                $data['pageTitle'] = "Thank you";
+                $data['error'] = "you can get order details using login with mobile number ";
+
+                $this->load->view('include/navbar',$data);
+                $this->load->view('thankyou',$data);
+                $this->load->view('include/footer',$data);
+            }else{
+                $data['pageTitle'] = "Opps";
+                $data['error'] = "your order is not confim";
+                $this->load->view('include/navbar',$data);
+                $this->load->view('thankyou',$data);
+                $this->load->view('include/footer',$data);
+            }
     }
 
     function logout(){
         $this->session->sess_destroy();
         redirect('home');
+    }
+
+    function generateRandomString($length = 4) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
     }
 
 }

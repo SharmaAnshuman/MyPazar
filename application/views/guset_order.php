@@ -1,4 +1,7 @@
-<?php if($error){ echo "<span class='alert alert-denger'>$error</span>"; }?>
+<?php 
+if($error){ echo "<span class='alert alert-denger'>$error</span>"; }
+
+?>
 <script type="text/javascript">
 	$(document).ready(function (){
 
@@ -25,10 +28,12 @@
 
 	});	 
 </script>
-<form class="p-4" action="myaccount/guset_order/<?= $order_id ?>" method="POST">
+<form class="p-4" action="<?php echo base_url('myaccount/guset_order'); ?>" method="POST">
   <div class="form-group">
   	<label for="name">Full Name</label>
     <input type="text" id="name" name="name" class="form-control" placeholder="Full Name">
+    <label for="email">Email Address</label>
+    <input type="email" id="email" name="email" class="form-control" placeholder="Email">
     <label for="mobile">Mobile Number</label>
     <input type="number" id="mobile" name="mobile" class="form-control" placeholder="9900099000" maxlength="10">
     <label for="password">Password</label>

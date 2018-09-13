@@ -44,7 +44,7 @@ class Order extends CI_Model {
         }else{
             $UID = $this->session->userdata("guset_UID");
         }
-        $query = $this->db->query("SELECT * FROM `myorder`,`vegetables` WHERE myorder.VID = vegetables.id and myorder.UID = '".$UID."'"); 
+        $query = $this->db->query("SELECT * FROM `myorder`,`vegetables` WHERE myorder.VID = vegetables.id and myorder.status = 'incart' and myorder.UID = '".$UID."'"); 
         return $query->result();
     }
 
@@ -80,11 +80,19 @@ class Order extends CI_Model {
 
     }
 
-    function make_order($order_id){
-        $this->status = "order";
-        $this->updated_at = date('d/m/Y h:m:s');
-        $this->db->where("id", $order_id);
-        $this->db->update('myorder', $this);        
+    function make_order($order_id,$UID){
+        $data = array(
+            'status' => 'Order',
+            'updated_at' => date('d/m/Y h:m:s'),
+            'UID' => $UID,
+        );
+        $this->db->where("order_id", $order_id);
+        if($this->db->update('myorder', $data)){
+            return true;
+        }else{
+            return false;
+        }
+
     }
 
     function get_order_info(){

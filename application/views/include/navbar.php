@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-  <link rel="icon" href="<?php echo base_url("assets/src/img/logo.svg"); ?>" sizes="any" type="image/svg+xml">
+  <link rel="icon" href="<?php echo base_url("assets/src/img/logo.ico"); ?>">
 	<link rel="stylesheet" href="<?php echo base_url("assets/lib/bootstrap/css/bootstrap.min.css"); ?>" />
-	<link rel="stylesheet" href="<?php echo base_url("assets/lib/font-awesome/css/font-awesome.css"); ?>" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
 	<link rel="stylesheet" href="<?php echo base_url("assets/src/css/custom.css"); ?>" />
   <script src="<?php echo base_url("assets/lib/bootstrap/js/jquery.min.js"); ?>"></script>
   <script src="<?php echo base_url("assets/src/js/custom.js"); ?>"></script>
@@ -27,7 +27,7 @@
    </a>
    <div>
     <?php
-      if(!isset($this->session->userdata('userData')[0]->name)){
+      if(isset($this->session->userdata('userData')[0]->name)){
 
          ?>
         <a  href="<?php echo base_url('/myaccount'); ?>" class="text-white d-lg-none btn btn-outline-info">
@@ -36,12 +36,6 @@
         <?php
 
       }else{
-
-        ?>
-        <a  href="<?php echo base_url('/mysetting'); ?>" class="text-white d-lg-none btn btn-outline-info">
-          <span class="fa fa-user"></span>
-        </a>
-        <?php
 
       }
     ?>

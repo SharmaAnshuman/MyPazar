@@ -1,8 +1,14 @@
 <?php 
 class Users extends CI_Model {
 
-    var $user = null;
-    var $pass = null;
+    var $username = null;
+    var $password = null;
+    var $name = null;
+    var $email = null;
+    var $mobile = null;
+    var $type = null;
+    var $verified = "N";
+    var $AID = 0;
 
     function __construct()
     {
@@ -29,15 +35,21 @@ class Users extends CI_Model {
             return false;
     }
 
-    function add_guset_user($user,$pass){
+    function add_guset_user($name,$email,$mobile,$pass){
 
-        $this->user = $user;
-        $this->pass = $pass;
+        $this->name = $name;
+        $this->password = $pass;
         $this->type = "Guset";
+        $this->email = $email;
+        $this->mobile = $mobile;
+        $this->username = $mobile;
 
-        $result = $this->db->insert('Users', $this);
+        $result = $this->db->insert('users', $this);
         if($result){
-            return $result->id;
+            $id = $this->db->insert_id();
+            $query = $this->db->query("select * from users where `id` = '$id' ");
+            $this->session->set_userdata("userData",$query->result());
+            return $id;
         }else{
             return false;
         }

@@ -1,7 +1,7 @@
 
 	<div>
 	</div>
-	<center><a href="/myaccount/logout">Logout</a></center>
+	<center><a href="<?php echo base_url("/myaccount/logout")?>">Logout</a></center>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
