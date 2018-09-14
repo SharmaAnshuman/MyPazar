@@ -49,6 +49,7 @@ class Order extends CI_Model {
     }
 
     function get_update_token($order_id,$UID,$VID){
+        # Ajax Req.
 
         $userdata = $this->session->userdata("userData")[0];
         if(isset($userdata->id)){
@@ -96,6 +97,10 @@ class Order extends CI_Model {
     }
 
     function get_order_info(){
+
+        $userdata = $this->session->userdata("userData")[0];
+        $query = $this->db->query("SELECT * FROM `myorder` WHERE `UID`= '".$userdata->id."' ");
+        return $query->result();
 
     }
 

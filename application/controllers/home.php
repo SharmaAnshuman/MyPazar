@@ -79,15 +79,23 @@ class Home extends CI_Controller{
             }else{
                 $userData = $this->session->userdata('userData')[0];
                 if (isset($userData->name)) {
-                    $this->Order->make_order($order_id);
+                    if($this->Order->make_order($order_id,$userData->id)){
+                        $data['pageTitle'] = "Thank you";
+                        $this->load->view('include/navbar',$data);
+                        $this->load->view('thankyou',$data);
+                        $this->load->view('include/footer',$data);
+                    }
                 }else{
-                    echo "Please login..";
+                    redriect(base_url('home'));
                 }
             }
         }else{
 
-            echo print_r($result);
-            echo "404 ERROR";
+                $data['error'] = "Opps Error!";
+
+                $this->load->view('include/navbar',$data);
+                echo "<a href='".base_url("home")."'>Click Here</a>";
+                $this->load->view('include/footer',$data);
 
         }
     }

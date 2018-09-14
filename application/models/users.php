@@ -28,6 +28,21 @@ class Users extends CI_Model {
         return false;
     }
 
+    function get_userData($UID){
+
+        if($UID != "")
+        {
+            $query = $this->db->query("select * from users where  `id` = '$UID'");
+            if($query->num_rows() == 1){
+                return $query->result();
+            }else{
+                return false;
+            }
+        }
+        return false;
+
+    }
+
     function get_auth_token(){
         if(isset($_SESSION['userID']))
             return true;
@@ -55,15 +70,11 @@ class Users extends CI_Model {
         }
     }
 
-    function add_user(){
-
-    }
-
     function update_user_password(){
 
     }
 
-    function send_verification_mail(){
+    function send_verification_mail($email){
 
     }
 
