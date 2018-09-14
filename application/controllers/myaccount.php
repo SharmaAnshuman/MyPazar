@@ -78,6 +78,7 @@ class Myaccount extends CI_Controller{
         $pass = $this->input->post('password');
         $address = $this->input->post('address');
         $order_id = $this->session->userdata("order_id");
+        $pos = $this->input->post('pos');
 
         $this->load->model('Users');
         $this->load->model('Address');
@@ -94,7 +95,7 @@ class Myaccount extends CI_Controller{
                     $this->session->set_userdata("userData",$result);
                     if($UID != false)
                         $this->session->unset_userdata("guset_UID");
-                        $AID = $this->Address->set_user_address($UID, $address);
+                        $AID = $this->Address->set_user_address($UID, $address, $pos);
                     if($AID != false)
                         if($this->Order->make_order($order_id,$UID)){
                             $data['pageTitle'] = "Thank you";

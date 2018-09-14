@@ -17,7 +17,9 @@ class Address extends CI_Model {
 
     }
 
-    function set_user_address($uid,$address){
+    function set_user_address($uid,$address,$current_pos){
+
+        // echo $current_pos;
 
         $data = array(
             'UID' => $uid ,
@@ -26,7 +28,7 @@ class Address extends CI_Model {
             'road_name' => $address,
             'socity_name' => $address,
             'area_name' => $address,
-            'nearby' => $address,
+            'nearby' => $current_pos,
             'is_active'=> 'Y',
             'created_at' => date('dmY h:m:s'),
             'updated_at' => ' ',
