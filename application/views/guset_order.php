@@ -35,6 +35,8 @@ if($error){ echo "<span class='alert alert-denger'>$error</span>"; }
 
 	});	 
 </script>
+<small>if you have already account please login for order</small>
+<a href="<?= base_url('/myaccount') ?>" class="btn btn-primary">Login</a>
 <form class="p-4" action="<?php echo base_url('myaccount/guset_order'); ?>" method="POST">
   <div class="form-group">
   	<label for="name">Full Name</label>

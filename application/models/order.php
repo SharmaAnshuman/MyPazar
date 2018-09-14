@@ -104,4 +104,20 @@ class Order extends CI_Model {
 
     }
 
+    function update_g2u_id($order_id,$guset_UID,$UID){
+        $data = array(
+            'UID' => $UID,
+        );
+        $where = array(
+            'order_id' => $order_id,
+            'UID' => $guset_UID,
+        );
+        $this->db->where($where);
+        if($this->db->update('myorder', $data)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 }   

@@ -19,7 +19,7 @@ class Address extends CI_Model {
 
     function set_user_address($uid,$address,$current_pos){
 
-        // echo $current_pos;
+        # TO BE DONE
 
         $data = array(
             'UID' => $uid ,
