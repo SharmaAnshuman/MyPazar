@@ -6,13 +6,31 @@
   }
 </style>
 <?php 
-if($error){ echo "<span class='alert alert-denger'>$error</span>"; }
+if($error){ echo "<span class='alert alert-denger' id='error'>$error</span>"; }
 
 ?>
 <script type="text/javascript">
 	$(document).ready(function (){
 
-		$("#mobile").keydown(function (e) {
+		$("#otp").hide();
+
+		var mobileNum = false;
+
+		$("#userDetailsForm").submit(function( event ) {
+			  if($("#mobile").val().length === 10 && $("#mobile").css("border-width") === "2.39062px" )
+			  	return;
+
+			  $( "#error" ).text( "Please Enter All Details Propely!" ).show().fadeOut( 1000 );
+			  event.preventDefault();
+		});
+
+
+		$("#mobile").keyup(function (e) {
+	        if(!($("#mobile").val().length < 10)){ 
+	        	e.preventDefault();
+	        }
+	    }
+		$("#mobile").keyup(function (e) {
 	        if($("#mobile").val().length < 10){ 
 		        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13]) !== -1 ||
 		            (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
@@ -22,7 +40,9 @@ if($error){ echo "<span class='alert alert-denger'>$error</span>"; }
 		        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
 		            e.preventDefault();
 		        }
+		        mobileNum = false;
 		    }else{
+		    	mobileNum = true;
 		    	if ($.inArray(e.keyCode, [46, 8, 9, 27, 13]) !== -1 ||
 		            (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
 		            (e.keyCode >= 35 && e.keyCode <= 40)) {
@@ -30,26 +50,67 @@ if($error){ echo "<span class='alert alert-denger'>$error</span>"; }
 		        }else{
 					e.preventDefault();
 		        }
+		        if(confirm($("#mobile").val()+" is this right mobile number")){
+			    	process_m(mobileNum);
+		        }else{
+		        	$("#mobile").val("");
+		        }
 		    }
 	    });
 
 	});	 
+	function process_m(mobileNum){
+			if(mobileNum){
+			$("#mobile").prop('disabled', true);
+			$("#mobile")
+				.removeClass("col-12")
+				.addClass("col-6");
+			$("#otp").show();
+			$("#otp").keyup(function() {
+				if($("#otp").val().length ==  4){
+					// var jqxhr = $.post( "/ajaxrequest/sendotp",{mobile:$("#mobile").val()}, function() {
+					// })
+				 //  	.done(function() {
+					// 	  $.post("/ajaxrequest/confimotp",{userOTP:$("#otp").val()},function(){
+					// 	  }).done(function(data1){
+					// 	  		if(data1){
+						  			$("#otp").hide();
+						  			$("#mobile").css("border","2.39062px solid green");
+						  			$("#mobile")
+						  				.removeClass("col-6")
+						  				.addClass("col-12");
+
+					// 	  		}else{
+					// 	  			$("#otp").val("you have enter wrong OTP");
+					// 	  		}
+					// 	  });
+				 //  	})
+				 //  	.fail(function() {
+				 //   	 	alert( "error" );
+				 //  	});
+				}
+			});
+		}
+	}
 </script>
+
 <small>if you have already account please login for order</small>
 <a href="<?= base_url('/myaccount') ?>" class="btn btn-primary">Login</a>
-<form class="p-4" action="<?php echo base_url('myaccount/guset_order'); ?>" method="POST">
+<form class="p-4" action="<?php echo base_url('myaccount/guset_order'); ?>" method="POST" id="userDetailsForm">
   <div class="form-group">
   	<label for="name">Full Name</label>
     <input type="text" id="name" name="name" class="form-control" placeholder="Full Name">
     <label for="email">Email Address</label>
     <input type="email" id="email" name="email" class="form-control" placeholder="Email">
     <label for="mobile">Mobile Number</label>
-    <input type="number" id="mobile" name="mobile" class="form-control" placeholder="9900099000" maxlength="10">
+    <div class="row m-1">
+    <input type="number" id="mobile" name="mobile" class="form-control col-12" placeholder="9900099000" maxlength="10"><input type="number" name="otp" id="otp" placeholder="Enter 4 Digit OTP" class="form-control col-6">
+	</div>
     <label for="password">Password</label>
     <input type="password" id="password" name="password" class="form-control" placeholder="Password">
     <label for="address">Address</label>
     <textarea id="address" name="address" class="form-control" placeholder="Address"></textarea>
-    <input type="hidden="hidden"" name="pos" id="pos"/>
+    <input type="hidden" name="pos" id="pos"/>
   </div>
   <button type="submit" class="btn btn-primary" name="btn_signin" value="guset order">Confim Order</button>
   <div id="map" class="disabled"></div>
@@ -108,3 +169,106 @@ if($error){ echo "<span class='alert alert-denger'>$error</span>"; }
 <script async defer
 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6v5-2uaq_wusHDktM9ILcqIrlPtnZgEk&callback=initMap">
 </script>
+
+
+
+
+
+
+
+
+
+<!-- 
+
+<script type="text/javascript">
+	$(document).ready(function (){
+
+		$("#otp").hide();
+
+		var mobileNum = false;
+
+		$("#mobile").keyup(function (e) {
+	        if($("#mobile").val().length < 10){ 
+		        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13]) !== -1 ||
+		            (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
+		            (e.keyCode >= 35 && e.keyCode <= 40)) {
+		                 return;
+		        }
+		        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+		            e.preventDefault();
+		        }
+		        mobileNum = false;
+		    }else{
+		    	mobileNum = true;
+		    	if ($.inArray(e.keyCode, [46, 8, 9, 27, 13]) !== -1 ||
+		            (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
+		            (e.keyCode >= 35 && e.keyCode <= 40)) {
+		                 return;
+		        }else{
+					e.preventDefault();
+		        }
+		        if(confirm($("#mobile").val()+" is this right mobile number")){
+			    	process_m(mobileNum);
+		        }else{
+		        	$("#mobile").val("");
+		        }
+		    }
+	    });
+
+	});	 
+	function process_m(mobileNum){
+			if(mobileNum){
+			$("#mobile").prop('disabled', true);
+			$("#mobile")
+				.removeClass("col-12")
+				.addClass("col-6");
+			$("#otp").show();
+			$("#otp").keyup(function() {
+				if($("#otp").val().length ==  4){
+					// var jqxhr = $.post( "/ajaxrequest/sendotp",{mobile:$("#mobile").val()}, function() {
+					// })
+				 //  	.done(function() {
+					// 	  $.post("/ajaxrequest/confimotp",{userOTP:$("#otp").val()},function(){
+					// 	  }).done(function(data1){
+					// 	  		if(data1){
+						  			$("#otp").hide();
+						  			$("#mobile").css("border","2px solid green");
+						  			$("#mobile")
+						  				.removeClass("col-6")
+						  				.addClass("col-12");
+
+					// 	  		}else{
+					// 	  			$("#otp").val("you have enter wrong OTP");
+					// 	  		}
+					// 	  });
+				 //  	})
+				 //  	.fail(function() {
+				 //   	 	alert( "error" );
+				 //  	});
+				}
+			});
+		}
+	}
+</script>
+
+<small>if you have already account please login for order</small>
+<a href="<?= base_url('/myaccount') ?>" class="btn btn-primary">Login</a>
+<form class="p-4" action="<?php echo base_url('myaccount/guset_order'); ?>" method="POST">
+  <div class="form-group">
+  	<label for="name">Full Name</label>
+    <input type="text" id="name" name="name" class="form-control" placeholder="Full Name">
+    <label for="email">Email Address</label>
+    <input type="email" id="email" name="email" class="form-control" placeholder="Email">
+    <label for="mobile">Mobile Number</label>
+    <div class="row m-1">
+    <input type="number" id="mobile" name="mobile" class="form-control col-12" placeholder="9900099000" maxlength="10"><input type="number" name="otp" id="otp" placeholder="Enter 4 Digit OTP" class="form-control col-6">
+	</div>
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" class="form-control" placeholder="Password">
+    <label for="address">Address</label>
+    <textarea id="address" name="address" class="form-control" placeholder="Address"></textarea>
+    <input type="hidden" name="pos" id="pos"/>
+  </div>
+  <button type="submit" class="btn btn-primary" name="btn_signin" value="guset order">Confim Order</button>
+</form>
+-->

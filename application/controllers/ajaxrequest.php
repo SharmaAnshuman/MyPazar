@@ -86,6 +86,37 @@ class Ajaxrequest extends CI_Controller{
         return false;
     }
 
+    // var $timeOut = 5; // min
+    // var $country = 91;
+    // var $sender = "eSabji";
+    // var $route = 4;
+    // var $mobiles = null
+    // var $authkey = "demo";//"237543AXK7PWmNBz5b9b8693";
+    // var $message = null;
+    // var $OTP = null;
+
+    // var $api = null;
+
+    // function index(){}
+
+    // function prepare_otp($mobile){
+    //     $this->OTP = rand(1023,9999);
+
+    //     $this->mobiles = $mobile;
+    //     $this->message = "
+    //     Your verification code is ".$this->OTP."
+        
+    //     Welcome to eSabji
+    //     http://9m.io/03oD
+    //     "
+    //     return $api = "http://api.msg91.com/api/sendhttp.php?country=".$this->country."&sender=".$this->sender."&route=".$this->route."&mobiles=".$this->mobiles."&authkey=".$this->authkey."&message=".$this->message;
+
+    // }
+
+    // function send_otp(){
+
+    // }
+
     // function add_to_cart($arr){
     //     echo $arr;
 

@@ -11,7 +11,7 @@
  *
  * @author Sharma Anshuman
  */
-class Myaccount extends CI_Controller{
+class System extends CI_Controller{
     
     public $error = "";
 
@@ -20,5 +20,9 @@ class Myaccount extends CI_Controller{
     	$this->load->view('system');
     	echo "System";
 
+    }
+
+    function add_vegetables(){
+    	echo "add vegetable;";
     }
 }
