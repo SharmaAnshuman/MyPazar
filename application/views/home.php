@@ -17,7 +17,7 @@
 			                            <span>
 			                              <input type="radio" name="qtyMode<?= $product_item->id; ?>" id="qtyMode" onclick="selectQty(this,false)" value="<?= $product_item->id ?>_<?= '100gm'?>">100g</input>
 			                              <small id="price"> Rs. <?php 
-			                              $perGm = $product_item->price250/100;
+			                              $perGm = $product_item->price250/250;
 			                              $price100 = $perGm * 100;
 			                              echo $price100; ?></small>
 			                            </span>
@@ -35,10 +35,12 @@
 			                              <input type="radio" name="qtyMode<?= $product_item->id; ?>" id="qtyMode" onclick="selectQty(this,false)" value="<?= $product_item->id ?>_<?= '500gm'?>">500g</input>
 			                              <small id="price"> Rs. <?= $product_item->price500; ?> </small>
 			                              <small id="discount" class="text-danger">
-			                              	<?php 
-				                              $dec = $product_item->price250 - $product_item->price500;
-				                              $disocunt = $dec % $product_item->price250 * 100;
-				                              echo $disocunt; 
+			                              	<?php
+											$mrp = $product_item->price250*2;
+											$discount_price = $mrp - $product_item->price500;
+											$disocunt_per = ($discount_price/$mrp) * 100;
+				                            settype($disocunt_per,"integer"); 
+				                            echo $disocunt_per;
 				                            ?>% discount
 				                          </small>
 			                            </span>
@@ -49,11 +51,13 @@
 			                              <input type="radio" name="qtyMode<?= $product_item->id; ?>" id="qtyMode" onclick="selectQty(this,true)" value="<?= $product_item->id ?>_<?= '1kg'?>">1kg</input>
 			                              <small id="price"> Rs. <?= $product_item->price1000; ?> </small>
 			                              <small id="discount"  class="text-danger">
-			                              	<?php 
-				                              $dec = $product_item->price250 - $product_item->price1000;
-				                              $disocunt = $dec % $product_item->price250 * 100;
-				                              echo $disocunt; 
-				                            ?> % discount
+			                              	<?php
+											$mrp = $product_item->price250*4;
+											$discount_price = $mrp - $product_item->price1000;
+											$disocunt_per = ($discount_price/$mrp) * 100;
+				                            settype($disocunt_per,"integer"); 
+				                            echo $disocunt_per; 
+				                            ?>% discount
 				                          </small> 
 			                            </span>
 			                          </small>

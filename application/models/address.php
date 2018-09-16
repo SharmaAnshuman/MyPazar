@@ -20,18 +20,18 @@ class Address extends CI_Model {
     function set_user_address($uid,$address,$current_pos){
 
         # TO BE DONE
+        $pos = explode(",",$current_pos) ; //22.258651999999998,71.1923805
+        $lat = $pos[0];
+        $lng = $pos[1];
 
         $data = array(
             'UID' => $uid ,
-            'house_name' => $address,
-            'house_no' => $address,
-            'road_name' => $address,
-            'socity_name' => $address,
-            'area_name' => $address,
-            'nearby' => $current_pos,
+            'address' => $address,
+            'lat' => $lat,
+            'lng' => $lng,
             'is_active'=> 'Y',
             'created_at' => date('dmY h:m:s'),
-            'updated_at' => ' ',
+            'updated_at' => '',
          );
         
         $result = $this->db->insert('address', $data);

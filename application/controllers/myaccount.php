@@ -109,9 +109,13 @@ class Myaccount extends CI_Controller{
                             $this->session->unset_userdata("guset_UID");
                             $AID = $this->Address->set_user_address($UID, $address, $pos);
                         if($AID != false)
+                            $this->Users->update_address($UID,$AID);
                             if($this->Order->make_order($order_id,$UID)){
+                                $this->load->model('Order');
+                                
                                 $data['pageTitle'] = "Thank you";
                                 $data['error'] = "you can get all order details from my account";
+
                                 $this->load->view('include/navbar',$data);
                                 $this->load->view('thankyou',$data);
                                 $this->load->view('include/footer',$data);
@@ -145,8 +149,9 @@ class Myaccount extends CI_Controller{
                 }
                 $order_id = null;
                 $this->session->unset_userdata("order_id");
-            }
-            echo "for registed users : you can back after time";
+            }            
+        }else{
+            redirect(base_url('home'));
         }
     }
 

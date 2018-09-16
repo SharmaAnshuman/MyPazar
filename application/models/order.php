@@ -27,11 +27,16 @@ class Order extends CI_Model {
         $this->qty = $qty;
         $this->qty_mode = $qtyMode;
         $this->price = $price;
-        $this->amount = $amount;
         $this->discount = $discount;
         $this->saved_amount = $saved_amount;
         $this->status = $status;
         $this->created_at = $created_date;
+
+        if($this->qty==="100"){
+            $perGm = $this->price/250;
+            $this->price = $perGm * 100;
+        }
+        $this->amount = $this->price;
         
         $this->db->insert('myorder', $this);
     }
@@ -69,12 +74,17 @@ class Order extends CI_Model {
         $this->qty = $qty;
         $this->qty_mode = $qtyMode;
         $this->price = $price;
-        $this->amount = $amount;
         $this->discount = $discount;
         $this->saved_amount = $saved_amount;
         $this->status = $status;
         $this->created_at = $update_item->created_at;
         $this->updated_at = $updated_at;
+
+        if($this->qty=="100"){
+            $perGm = $this->price/250;
+            $this->price = $perGm * 100;
+        }
+        $this->amount = $this->price;
         
         $this->db->where("id", $update_item->id); 
         $this->db->update('myorder', $this);
@@ -96,10 +106,10 @@ class Order extends CI_Model {
 
     }
 
-    function get_order_info(){
+    function get_order_info($order_id){
 
         $userdata = $this->session->userdata("userData")[0];
-        $query = $this->db->query("SELECT * FROM `myorder` WHERE `UID`= '".$userdata->id."' ");
+        $query = $this->db->query("SELECT * FROM `myorder`,`vegetables` WHERE myorder.order_id = '".$order_id."' and myorder.UID= '".$userdata->id."' and vegetables.id = myorder.VID");
         return $query->result();
 
     }

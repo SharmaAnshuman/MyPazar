@@ -36,7 +36,11 @@
         <?php
 
       }else{
-
+         ?>
+        <a  href="<?php echo base_url('/myaccount'); ?>" class="text-white d-lg-none btn btn-outline-info">
+          <span class="fa fa-user"></span>
+        </a>
+        <?php
       }
     ?>
     <a  href="<?php echo base_url('/home/cart'); ?>" class="text-white d-lg-none btn btn-outline-info">

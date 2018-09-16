@@ -1,5 +1,9 @@
 <?php
-//echo $error;
+$total_order_amount = 0;
+$this->load->model("Order");
+$order_id = $this->session->userdata("order_id");
+$order = $this->Order->get_order_info($this->session->userdata("order_id"));
+$this->session->unset_userdata("order_id");
 ?>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.js"></script>
@@ -28,6 +32,7 @@
               <th colspan="2">
                 <h1>
                   <img src="<?php echo base_url("assets/src/img/logo.svg"); ?>" id="brandName" width="35" height="35">              Order <small>Details</small></h1>
+                  <center><small>Order ID: <strong><?= $order_id ?></strong></small></center>
           </tr>
              <!-- <tr>
                  <td ><small style="font-size: 10px">Order ID: 908098ASDA</small></td>
@@ -37,24 +42,33 @@
               <td colspan="2"><hr/></td>
           </tr>
           <tr>
-              <td  align="center"><small>Order ID:</small></td>
-              <td  class="text-center"  align="right"><h4><?= $this->session->userdata("order_id") ?></h4></td>
+              <td  class="text-center" align="center" colspan="2">
+              	<div class="m-0">
+              		<?php foreach ($order as $item): ?>
+	              	<p><?= $item->name ?>  <?= $item->qty.$item->qty_mode ?>  Rs.<?php $total_order_amount += $item->amount; 
+	              	echo $item->amount;?></p>
+	              <?php endforeach; ?>
+	            </div>
+              </td>
           </tr>
           <tr>
-              <td  align="center"><small>Total Vegetable:</small></td>
-              <td  class="text-center" align="center"><h4>X</h4></td>
-          </tr>
-          <tr>
-              <td  align="center"><i class="fa fa-road fa-4" aria-hidden="true"></i> <small>Delivery Status</small></td>
-              <td  class="text-center" align="center"><h5> Un-Delivered</h5></td>
+              <td  align="center"><small>Delivery Status</small></td>
+              <td  class="text-center" align="center"><h6 class="m-0"> <small>Delivering to you..</small></h6></td>
               
-          </tr>
+          </tr> 
           <tr>
               <td  align="center"><small>Amount:</small></td>
-              <td  class="text-center" align="center"><h4>Rs.1232</h4></td>
+              <td  class="text-center" align="center">
+              <?php 
+                if($total_order_amount<99){ $total_order_amount += 10;}else if($total_order_amount>100){ }
+              ?>
+              <h4 class="m-0">Rs.<?= $total_order_amount ?></h4>
+          </td>
           </tr>
           <tr>
-              <td colspan="2"><hr/></td>
+              <td colspan="2"><hr/>
+              <center><small>Order Date: <?= date("d/m/Y h:m:s") ?></small></center>
+            </td>
           </tr>
           
         </table>          
@@ -62,7 +76,11 @@
           <tr>
               <td colspan="2" align="right">
                 <h5>
-                  <a class="btn btn-link" href="" id="o_img" download="Order_<?= $this->session->userdata('order_id'); ?>" target="_blank"><i class="fa fa-print" aria-hidden="true"></i></span> <small>Save Recipet</small></a>
+                  <a class="btn btn-link" href="" id="o_img" download="Order_<?= $order_id ?>.png" target="_blank"><i class="fa fa-print" aria-hidden="true"></i></span> <small>Save Recipet</small></a>
+                  <a class="btn btn-link float-right" href="<?=  base_url('home') ?>"><small>Goto Home</small></a>
                 </h5>
               </td>
           </tr>
+          <?php
+$order_id = null;
+          ?>

@@ -64,7 +64,7 @@ class Home extends CI_Controller{
         $order_id = $this->session->userdata("order_id");
         $result = $this->Order->get_mycart();
         
-        if(!empty($result)){
+        if((!empty($result)) && isset($order_id)){
             if (strpos($result[0]->UID, "guset_") !== false) {
 
                 $data['pageTitle'] = "Address";
@@ -86,17 +86,11 @@ class Home extends CI_Controller{
                         $this->load->view('include/footer',$data);
                     }
                 }else{
-                    redriect(base_url('home'));
+                    redirect(base_url('home'));
                 }
             }
         }else{
-
-                $data['error'] = "Opps Error!";
-
-                $this->load->view('include/navbar',$data);
-                echo "<a href='".base_url("home")."'>Click Here</a>";
-                $this->load->view('include/footer',$data);
-
+            redirect(base_url('home'));
         }
     }
 

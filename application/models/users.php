@@ -70,6 +70,34 @@ class Users extends CI_Model {
         }
     }
 
+    function update_address($UID,$AID){
+
+        $data = array(
+            'AID' => $AID,
+        );
+        $this->db->where("id", $UID);
+        if($this->db->update('users', $data)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    function check_mobile_register($mobile){
+
+        if($mobile != "")
+        {
+            $query = $this->db->query("select * from users where  `mobile` = '$mobile'");
+            if($query->num_rows() == 1){
+                return false; // already register mobile
+            }else{
+                return true; // new mobile num
+            }
+        }
+        return false;
+
+    }
+
     function update_user_password(){
 
     }

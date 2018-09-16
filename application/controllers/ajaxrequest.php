@@ -64,7 +64,12 @@ class Ajaxrequest extends CI_Controller{
         if(isset($userdata->id)){
 
             $UID = $userdata->id;
-            $this->Order->add_to_incart($order_id,$UID,$VID,$qty,$qtyMode,$price,$amount,$discount,$saved_amount,'incart',date('d/m/Y h:m:s'));
+            $token = $this->Order->get_update_token($this->session->userdata("order_id"),$UID,$VID);
+            if($token){
+                $this->Order->update_to_incart($token[0],$order_id,$UID,$VID,$qty,$qtyMode,$price,$amount,$discount,$saved_amount,'incart',date('d/m/Y h:m:s'));
+            }else{
+                $this->Order->add_to_incart($this->session->userdata("order_id"),$UID,$VID,$qty,$qtyMode,$price,$amount,$discount,$saved_amount,'incart',date('d/m/Y h:m:s'));
+            }
             return true;
 
         }else{
@@ -86,63 +91,120 @@ class Ajaxrequest extends CI_Controller{
         return false;
     }
 
-    // var $timeOut = 5; // min
-    // var $country = 91;
-    // var $sender = "eSabji";
-    // var $route = 4;
-    // var $mobiles = null
-    // var $authkey = "demo";//"237543AXK7PWmNBz5b9b8693";
-    // var $message = null;
-    // var $OTP = null;
 
-    // var $api = null;
+    var $timeOut = 5; // min
+    var $country = 91;
+    var $sender = "eSabji";
+    var $route = 4;
+    var $mobiles = null;
+    var $authkey = "demo"; // "237543AXK7PWmNBz5b9b8693"
+    var $message = null;
+    var $OTP_code = null;
 
-    // function index(){}
+    var $api = null;
 
-    // function prepare_otp($mobile){
-    //     $this->OTP = rand(1023,9999);
+    function prepare_otp($mobile){
 
-    //     $this->mobiles = $mobile;
-    //     $this->message = "
-    //     Your verification code is ".$this->OTP."
-        
-    //     Welcome to eSabji
-    //     http://9m.io/03oD
-    //     "
-    //     return $api = "http://api.msg91.com/api/sendhttp.php?country=".$this->country."&sender=".$this->sender."&route=".$this->route."&mobiles=".$this->mobiles."&authkey=".$this->authkey."&message=".$this->message;
+        $this->load->model("Users");
+        $this->load->model("Otp");
+        if($this->Users->check_mobile_register($mobile)){
+            $this->OTP_code = rand(1023,9999);
+            $this->session->set_userdata("otp",$this->OTP_code);
+            $this->session->set_userdata("mobile",$mobile);
+            if($this->Otp->set_otp()){
+                $this->mobiles = $mobile;
+                $otpStatus = $this->send_sms_otp($this->OTP_code,$this->session->userdata("mobile"));
+                // otp contain error (then show err)
+                if($otpStatus)
+                {
+                    echo 0; // otp headers_sent()
+                }
+                else
+                {
+                    echo "x";
+                }
+            }else{
+                echo 2; // otp entry failed
+            }
 
-    // }
+        }else{
+            echo 1; // mobile number found
+        }
+    }
 
-    // function send_otp(){
+    function sendotp($mobile){
+        echo $this->prepare_otp($mobile);
+    }
 
-    // }
+    function confimotp($userOTP){
+        if($this->session->userdata("otp") == $userOTP){
+            echo 0; // otp confim
+        }else{
+            echo 1; // otp not verified
+        }
+    }
 
-    // function add_to_cart($arr){
-    //     echo $arr;
+    function send_sms_otp($otp,$mobile){
+            //Your authentication key
+            $authKey = "demo"; //"237543AXK7PWmNBz5b9b8693";
 
-    //     // $something = $this->session->userdata('user_enter');
-    //     // echo $something['order_id'];
-    //     // if(isset($something['order_id'])){
-    //     //     $arr = explode("_",$arr);
-    //     //     $qtyArr = preg_split('#(?<=\d)(?=[a-z])#i', $arr[1]);
-    //     //     $VID = $arr[0];
-    //     //     $qty = $qtyArr[0];
-    //     //     $qtyMode = $qtyArr[1];
-    //     //     $this->load->model('Users');
-    //     //     if(!$this->Users->get_auth_token())
-    //     //     {
+            //Multiple mobiles numbers separated by comma
+            $mobileNumber = $mobile;
 
-    //     //     }
-    //     //     $this->load->model('Order');
-    //     //     $this->Order->add_to_incart($order_id,$UID,$VID,$qty,$qtyMode,$price,$amount,$discount,$saved_amount,'incart',date('d/m/Y h:m:s'));
-    //     // }
-    //     // if(isset($this->session->user_enter)){
-    //     //     $order_id = $_SESSION['user_enter'];
-    //     //     echo $arr;
-    //     // }else{
-    //     //     echo "not found";
-    //     //     echo $this->session->user_enter;
-    //     // }
-    // }
+            //Sender ID,While using route4 sender id should be 6 characters long.
+            $senderId = "eSabji";
+
+            //Your message to send, Add URL encoding here.
+            $message = urlencode("
+                Your verification code is ".$otp."
+                    
+            Welcome to eSabji
+            http://9m.io/03oD");
+
+            //Define route 
+            $route = "4";
+
+            //Prepare you post parameters
+            $postData = array(
+                'authkey' => $authKey,
+                'mobiles' => $mobileNumber,
+                'message' => $message,
+                'sender' => $senderId,
+                'route' => $route
+            );
+
+            //API URL
+            $url="http://api.msg91.com/api/sendhttp.php";
+
+            // init the resource
+            $ch = curl_init();
+            curl_setopt_array($ch, array(
+                CURLOPT_URL => $url,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_POST => true,
+                CURLOPT_POSTFIELDS => $postData
+                //,CURLOPT_FOLLOWLOCATION => true
+            ));
+
+
+            //Ignore SSL certificate verification
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+
+
+            //get response
+            $output = curl_exec($ch);
+
+            //Print error if any
+            if(curl_errno($ch))
+            {
+                return 'error:' . curl_error($ch);
+            }
+
+            curl_close($ch);
+
+            return $output;
+    }
+
 
 }
