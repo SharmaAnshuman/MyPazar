@@ -52,19 +52,17 @@
 		        }else{
 					e.preventDefault();
 		        }
-		        if(confirm($("#mobile").val()+" is this right mobile number")){
 			    	process_m(mobileNum);
-		        }else{
-		        	$("#mobile").val("");
-		        }
 		    }
 	    });
 
 	});	 
 	function process_m(mobileNum){
-			if(mobileNum && $("#mobile").val().length===10){
+		alert(mobileNum);
+		alert($("#mobile").val());
 			$.post("<?= base_url("/ajaxrequest/sendotp") ?>/"+$("#mobile").val(), function() {
 			}).done(function(data){
+				alert(data);
 				if(data == 0){
 					$("#mobile").prop('readonly', true);
 					$("#mobile")
@@ -77,14 +75,20 @@
 			  		$("#otp").prop('disabled', false);
 			  		$("#mobile").prop('readonly', false);
 				}
-			});
+			})
+			.fail(function(err) {
+			    alert( "error" + err.readyState );
+			    alert( "error" + err.responseText );
+			    alert( "error" + err.status );
+			    alert( "error" + err.statusText );
+			 });
 			$("#otp").keyup(function() {
 				if($("#otp").val().length ==  4){
 
 						  $.post("<?= base_url("/ajaxrequest/confimotp") ?>/"+$("#otp").val(),function(){
 						  }).done(function(data1){
 						  	$("#otp").prop('disabled', true);
-						  	// alert(data1);
+						  	alert(data1);
 						  		if(data1 == 0){
 						  			$("#otp").hide();
 						  			$("#mobile").css("border","2.39062px solid green");
@@ -100,9 +104,6 @@
 						  });
 				}
 			});
-		}else{
-			$("#mobile").val("");
-		}
 	}
 </script>
 <?php 

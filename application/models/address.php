@@ -2,7 +2,6 @@
 class Address extends CI_Model {
 
     var $UID = null;
-    var $house_name = null;
 
     function __construct(){
 
@@ -30,7 +29,8 @@ class Address extends CI_Model {
             'lat' => $lat,
             'lng' => $lng,
             'is_active'=> 'Y',
-            'created_at' => date('dmY h:m:s'),
+            'house_no' => '0',
+            'created_at' => date('d/m/Y h:m:s'),
             'updated_at' => '',
          );
         
