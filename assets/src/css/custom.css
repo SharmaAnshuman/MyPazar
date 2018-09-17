@@ -7,3 +7,26 @@ body {
     position: fixed;
     z-index: 1030;
 }
+.process_window{
+    width: -webkit-fill-available;
+    height: 200%;
+    position: absolute;
+    background: #0000008c;
+  }
+  .process_content{
+    color: white;
+    position: absolute;
+    width:  auto;
+    height: auto;
+    top: 10%;
+    left: 40%;
+  }
+  .process_img{
+/*        -webkit-animation: fa-spin 0.5s infinite linear;
+    animation: fa-spin 0.4s infinite linear;*/
+    position: absolute;
+    top: 3%;
+    left: 40%;
+    width: 105px;
+    height: 105px;
+  }

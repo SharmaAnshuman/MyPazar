@@ -6,11 +6,20 @@ class Price extends CI_Model {
         parent::__construct();
     }
 
-    function create_price(){
+    function vegetable($VID,$g250,$g500,$kg1){
 
-    }
-
-    function update_price(){
+        $data = array(
+            'price250' => $g250, 
+            'price500' => $g500, 
+            'price1000' => $kg1, 
+        );
+        
+        $this->db->where("VID", $VID); 
+        if($this->db->update('price', $data)){
+            return true;
+        }else{
+            return false;
+        }
 
     }
 

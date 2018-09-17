@@ -7,7 +7,6 @@ class Vegetable extends CI_Model {
     }
 
     function add_vegetable(){
-
     }
 
 	function get_vegetable(){

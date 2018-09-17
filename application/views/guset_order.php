@@ -58,11 +58,9 @@
 
 	});	 
 	function process_m(mobileNum){
-		alert(mobileNum);
-		alert($("#mobile").val());
+		showProcess(true);
 			$.post("<?= base_url("/ajaxrequest/sendotp") ?>/"+$("#mobile").val(), function() {
 			}).done(function(data){
-				alert(data);
 				if(data == 0){
 					$("#mobile").prop('readonly', true);
 					$("#mobile")
@@ -104,6 +102,7 @@
 						  });
 				}
 			});
+		showProcess(false);
 	}
 </script>
 <?php 
