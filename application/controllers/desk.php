@@ -30,8 +30,15 @@ class Desk extends CI_Controller{
         $system_token = $this->load->input("desk_token");
         if($system_token == "9722505034"){
             $this->session->set_userdata("desk",true);
+            $config['maintenance_mode']= TRUE;
             redirect(base_url('desk'));
         }
+    }
+
+    function system_logout(){
+        $this->session->unset_userdata("desk",true);
+        $config['maintenance_mode']= False;
+        redirect(base_url('home'));
     }
 
     //  V E G E T A B L E S

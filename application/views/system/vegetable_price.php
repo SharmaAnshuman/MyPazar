@@ -11,7 +11,7 @@
           $VID = $currentRowCells[0].firstChild.id;
           $per_item_price = $currentRowCells[3].firstChild.value;
           $arg = $VID+"_"+$per_item_price;
-          $.post("<?= base_url('/ajaxrequest/add_vegetable_price/') ?>"+$arg+"/true",function(){
+          $.post("<?= base_url('/ajaxrequest/add_vegetable_price/') ?>/"+$arg+"/true",function(){
 
           }).done(function(){
 
@@ -23,7 +23,7 @@
           $500g = $currentRowCells[2].firstChild.value;
           $1kg = $currentRowCells[3].firstChild.value;
           $arg = $VID+"_"+$250g+"_"+$500g+"_"+$1kg;
-          $.post("<?= base_url('/ajaxrequest/add_vegetable_price/') ?>"+$arg+"/false",function(){
+          $.post("<?= base_url('/ajaxrequest/add_vegetable_price/') ?>/"+$arg+"/false",function(){
 
           }).done(function(){
 
@@ -61,7 +61,7 @@
     
     <?php foreach($vegetables as $veg): ?>
 	    <tr>
-	       <td><img src="<?= base_url('assets/src/img/veg/').$veg->img ?>" height="50px" width="50px" id="<?= $veg->id ?>"/></td>
+	       <td><img src="<?= base_url('assets/src/img/').$veg->img ?>" height="50px" width="50px" id="<?= $veg->id ?>"/></td>
 	       <td><input class="form-control form-control-sm" type="number" id="250g" placeholder="250g price"></td>
 	       <td><input class="form-control form-control-sm" type="number" id="500g" placeholder="500g price"></td>
 	       <td><input class="form-control form-control-sm" type="number" id="1kg"  placeholder="1Kg price"></td>

@@ -1,3 +1,8 @@
+<?php if($this->config->item('maintenance_mode') == TRUE) {
+        $this->load->view('maintenance_view');
+        die();
+    }
+?>
 <!doctype html>
 <html lang="en">
   <head>
