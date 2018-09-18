@@ -209,9 +209,8 @@ class Ajaxrequest extends CI_Controller{
     function add_vegetable_price($arg,$price_pre_qty){
         $this->load->model('Price');
         $arg = explode("_",$arg);
-        echo print_r($arg);
 
-        if($price_pre_qty == true){
+        if($price_pre_qty == "true"){
             // $VID = $arg[0];
             // $1kg = $arg[1];
             // if($this->Price->add_vegetable($VID,"00","00",$1kg)){
@@ -222,7 +221,7 @@ class Ajaxrequest extends CI_Controller{
             //         return 0;
             // }
         }
-        else if($price_pre_qty == false)
+        else if($price_pre_qty == "false")
         {
               // $VID = $arg[0];
               // $250g = $arg[1];

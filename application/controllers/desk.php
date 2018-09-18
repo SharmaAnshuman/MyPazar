@@ -28,9 +28,12 @@ class Desk extends CI_Controller{
 
     function system_login(){
         $system_token = $this->input->post("desk_token");
-        if($system_token == "9722505034"){
+        $m_mode = $this->input->post("m_mode");
+        if($system_token == "admin"){
             $this->session->set_userdata("desk",true);
-            $config['maintenance_mode']= TRUE;
+            if($m_mode == "true"){
+                $config['maintenance_mode']= TRUE;
+            }
             redirect(base_url('desk'));
         }
     }
@@ -42,13 +45,19 @@ class Desk extends CI_Controller{
     }
 
     //  V E G E T A B L E S
-    function vegetables_add(){
-    	echo "add vegetable;";
-    }
+    function vegetable_add(){
+        //DB
+        $this->load->model('Vegetable');
+        $data['veges'] = $this->Vegetable->get_vegetable();
 
-	function vegetable_update(){
-		echo "update vegetable;";
-	}
+        // Page
+        $data['pageTitle'] = 'Add Vegetable';
+        
+        // View
+        $this->load->view('include/navbar',$data);
+        $this->load->view('system/vegetable_add',$data);
+        $this->load->view('include/footer',$data);
+    }
 
     function vegetable_price(){
     	// DB

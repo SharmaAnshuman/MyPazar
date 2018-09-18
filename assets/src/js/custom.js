@@ -1,3 +1,4 @@
+alert(navigator.userAgent);
 
 //Force browers to stop in desktop
     function is_mobile() { 
