@@ -22,6 +22,10 @@
   </head>
   <body>
 
+<div id="process_window" class="d-none">
+  <img src="https://loading.io/spinners/lava-lamp/lg.lava-lamp-preloader.gif" id="process_img" class="process_img">
+  <p id="process_content"></p>
+</div>
 <nav class="navbar navbar-expand-lg navbar-dark mb-2">
   <a class="navbar-brand" href="<?php echo base_url(); ?>"  >
       <img src="<?php echo base_url("assets/src/img/logo.png"); ?>" id="brandName" width="35" height="35" class="d-inline-block align-top" alt="eCoupons">

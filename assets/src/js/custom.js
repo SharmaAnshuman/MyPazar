@@ -77,12 +77,12 @@
       }
 
 // Showing Proccess On Screen
-function showProcess(token){
+function showProcess(token,msg="Please Wait.."){
     if(token){
       $("#process_window").removeClass("d-none").addClass("process_window");
-      $("#process_content").addClass("process_content").html("Please Wait..");
+      $("#process_content").addClass("process_content").html(msg);
     }else{
-        $("#process_content").removeClass("process_content").html("");
-        $("#process_window").removeClass("process_window").addClass("d-none");
+        $("#process_content").html(msg);
+        setInterval(function(){ $("#process_window").removeClass("process_window").addClass("d-none"); }, 3000);
     }
 }

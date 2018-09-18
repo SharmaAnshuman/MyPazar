@@ -20,7 +20,7 @@
 <?php
 	}else{
 	?>
-		<form action="<?= base_url('desk/desk_login') ?>">
+		<form action="<?= base_url('desk/system_login') ?>" method="POST">
 			<input type="number" name="desk_token"/>
 			<input type="submit" name="btn_desk_login">
 		</form>

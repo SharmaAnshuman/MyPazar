@@ -8,10 +8,11 @@ body {
     z-index: 1030;
 }
 .process_window{
-    width: -webkit-fill-available;
+   width: -webkit-fill-available;
     height: 200%;
     position: absolute;
     background: #0000008c;
+    z-index: 9999 !important;
   }
   .process_content{
     color: white;
@@ -19,7 +20,8 @@ body {
     width:  auto;
     height: auto;
     top: 10%;
-    left: 40%;
+    left: 43%;
+    margin-top: 10px;
   }
   .process_img{
 /*        -webkit-animation: fa-spin 0.5s infinite linear;

@@ -13,6 +13,9 @@
 									<h5 class="card-title "><?= $product_item->name; ?></h5>
 									<p class="card-text"><small><?= substr($product_item->info,0,42); ?></small></p>
 									<div class="qty_div">
+										<?php 
+											if($product_item->per_item !== "Y"){
+										?>
 			                          <small>
 			                            <span>
 			                              <input type="radio" name="qtyMode<?= $product_item->id; ?>" id="qtyMode" onclick="selectQty(this,false)" value="<?= $product_item->id ?>_<?= '100gm'?>">100g</input>
@@ -62,6 +65,16 @@
 			                            </span>
 			                          </small>
 			                          <input type="number" placeholder="1 kg" id="qty" class="d-none form-control form-control-sm mt-2">
+			                      <?php }else{ ?>
+			                      	<small>
+			                            <span>
+			                            	<br/>
+			                              <input type="radio" name="qtyMode<?= $product_item->id; ?>" id="qtyMode" onclick="selectQty(this,true)" value="<?= $product_item->id ?>_<?= '1kg'?>">1 Piece</input>
+			                              <small id="price"> Rs. <?= $product_item->price1000; ?> </small>
+			                            </span>
+			                          </small>
+			                          <input type="number" placeholder="Add more" id="qty" class="d-none form-control form-control-sm mt-2">
+			                      <?php } ?>
 			                          <br/>
 			                          <a class="btn btn-sm card-link text-primary d-none" id="btnAddToCart" onclick="btn_add(this)" data-product="123"><i class="fa fa-shopping-basket fa-4" aria-hidden="true"></i> Add To Cart</a>
 			                          <a id="btn_chng" class="d-none btn btn-sm card-link text-primary " onclick="btnQtyChange(this)" ><i class="fa fa-refresh" aria-hidden="true"></i>

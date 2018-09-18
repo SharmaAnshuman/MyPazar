@@ -31,7 +31,6 @@ class Ajaxrequest extends CI_Controller{
         $this->load->model('Price');
         $item_prices = $this->Price->get_vegetable_price($VID)[0];
 
-
         # Calculate Item Price
         if($qtyMode == "kg"){
             $qty = $qty * 1000;
@@ -45,6 +44,7 @@ class Ajaxrequest extends CI_Controller{
         }else if($qty > 999){
             $price = $item_prices->price1000;
             $amount = ($qty / 1000) * $price;
+            $price = $amount;
         }
         $discount = "TODO";
         $saved_amount = "TODO";
@@ -207,29 +207,36 @@ class Ajaxrequest extends CI_Controller{
     }
 
     function add_vegetable_price($arg,$price_pre_qty){
-        
         $this->load->model('Price');
         $arg = explode("_",$arg);
+        echo print_r($arg);
 
         if($price_pre_qty == true){
-            $VID = $arg[0];
-            $1kg = $arg[3];
-            if($this->Price->add_vegetable($VID,"00","00",$1kg)){
-                    return 1;
-              }else{
-                    return 0;
-              }
-        }else if($price_pre_qty == false){
-              $VID = $arg[0];
-              $250g = $arg[1];
-              $500g = $arg[2];
-              $1kg = $arg[3];
+            // $VID = $arg[0];
+            // $1kg = $arg[1];
+            // if($this->Price->add_vegetable($VID,"00","00",$1kg)){
+            //         return 1;
+            // }
+            // else
+            // {
+            //         return 0;
+            // }
+        }
+        else if($price_pre_qty == false)
+        {
+              // $VID = $arg[0];
+              // $250g = $arg[1];
+              // $500g = $arg[2];
+              // $1kg = $arg[3];
 
-              if($this->Price->add_vegetable($VID,$250g,$500g,$1kg)){
-                    return 1;
-              }else{
-                    return 0;
-              }
+              // if($this->Price->add_vegetable($VID,$250g,$500g,$1kg))
+              // {
+              //       return 1;
+              // }
+              // else
+              // {
+              //       return 0;
+              // }
         }
     }
 

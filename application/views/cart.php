@@ -11,11 +11,20 @@
 	<?php $total = 0; ?>
 	<!-- <center 	>Order ID: <small><?= $in_cart_items[0]->order_id ?></small></center> -->
 	<?php foreach($in_cart_items as $item):?>
-	<tr>
-		<td><center><img src='<?php echo base_url("assets/src/img/$item->img"); ?>' height="55px" width="55px"/><br/><?= $item->name ?></center></td>
-		<td><?php if($item->qty_mode == "kg"){echo ($item->qty/1000)." ".$item->qty_mode;}else{echo $item->qty." ".$item->qty_mode;} ?></td>
-		<td>Rs.<?php echo $item->amount; $total+= $item->amount; ?></td>
-	</tr>
+		<tr>
+			<td><center><img src='<?php echo base_url("assets/src/img/$item->img"); ?>' height="55px" width="55px"/><br/><?= $item->name ?></center></td>
+			<?php  if($item->per_item == "Y"){
+			?>
+				<td><?php if($item->qty_mode == "kg"){echo ($item->qty/1000)." Piece"; } ?></td>
+				<td>Rs.<?php echo $item->amount; $total+= $item->amount; ?></td>
+			<?php
+			}else{
+			?>
+				<td><?php if($item->qty_mode == "kg"){echo ($item->qty/1000)." ".$item->qty_mode;}else{echo $item->qty." ".$item->qty_mode;} ?></td>
+				<td>Rs.<?php echo $item->amount; $total+= $item->amount; ?></td>
+			<?php 
+			} ?>
+		</tr>
 	<?php endforeach; ?>
 	<tr>
 		<td colspan="3">

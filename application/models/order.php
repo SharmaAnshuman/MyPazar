@@ -49,7 +49,7 @@ class Order extends CI_Model {
         }else{
             $UID = $this->session->userdata("guset_UID");
         }
-        $query = $this->db->query("SELECT * FROM `myorder`,`vegetables` WHERE myorder.VID = vegetables.id and myorder.status = 'incart' and myorder.UID = '".$UID."'"); 
+        $query = $this->db->query("SELECT * FROM `myorder`,`vegetables`,`price` WHERE  price.VID = vegetables.id and myorder.VID = vegetables.id and myorder.status = 'incart' and myorder.UID = '".$UID."'"); 
         return $query->result();
     }
 
