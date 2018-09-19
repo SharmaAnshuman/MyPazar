@@ -139,6 +139,8 @@ class Ajaxrequest extends CI_Controller{
     function confimotp($userOTP){
         if($this->session->userdata("otp") == $userOTP){
             echo 0; // otp confim
+            $this->session->unset_userdata("otp");
+            $this->session->unset_userdata("mobile");
         }else{
             echo 1; // otp not verified
         }
@@ -155,11 +157,11 @@ class Ajaxrequest extends CI_Controller{
             $senderId = "eSabji";
 
             //Your message to send, Add URL encoding here.
-            $message = urlencode("
-                Your verification code is ".$otp."
-                    
-            Welcome to eSabji
-            http://9m.io/03oD");
+            $message = urlencode("Your verification code is ".$otp."
+
+            Welcome to eSabji Download Our Android App
+            http://9m.io/03oD
+            ");
 
             //Define route 
             $route = "4";
@@ -209,6 +211,7 @@ class Ajaxrequest extends CI_Controller{
     function add_vegetable_price($arg,$price_pre_qty){
         $this->load->model('Price');
         $arg = explode("_",$arg);
+        echo print($arg);
 
         if($price_pre_qty == "true"){
             // $VID = $arg[0];
