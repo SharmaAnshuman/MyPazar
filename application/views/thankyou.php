@@ -30,34 +30,35 @@ $this->session->unset_userdata("order_id");
         <table align="center" >
           <tr>
               <th colspan="2">
-                <h1>
-                  <img src="<?php echo base_url("assets/src/img/logo.svg"); ?>" id="brandName" width="35" height="35">              Order <small>Details</small></h1>
-                  <center><small>Order ID: <strong><?= $order_id ?></strong></small></center>
+                <h1><img src="<?php echo base_url("assets/src/img/logo.svg"); ?>" id="brandName" width="35" height="35"> Order <small>Details</small></h1>
+                <center><small>Order ID: <strong><?= $order_id ?></strong></small></center>
+              </th>
           </tr>
-             <!-- <tr>
-                 <td ><small style="font-size: 10px">Order ID: 908098ASDA</small></td>
-                 <td ><small><h5  style="font-size: 10px;margin-left:180px;margin-bottom: 0px">information</h5></small></td>
-          </tr> -->
           <tr>
               <td colspan="2"><hr/></td>
           </tr>
           <tr>
               <td  class="text-center" align="center" colspan="2">
               	<div class="m-0">
+                  <table class="m-0">
               		<?php foreach ($order as $item): ?>
-	              	<p><?= $item->name ?>  <?= $item->qty.$item->qty_mode ?>  Rs.<?php $total_order_amount += $item->amount; 
-	              	echo $item->amount;?></p>
-	              <?php endforeach; ?>
+                    <tr>
+  	              	  <td><?= $item->name ?></td>  
+                      <td><?= $item->qty."<small>".$item->qty_mode."</small>" ?></td>
+                      <td>Rs.<?php $total_order_amount += $item->amount; echo $item->amount;?></td>
+                    </tr>
+  	              <?php endforeach; ?>
+                </table>
 	            </div>
               </td>
           </tr>
           <tr>
               <td  align="center"><small>Delivery Status</small></td>
-              <td  class="text-center" align="center"><h6 class="m-0"> <small>Delivering to you..</small></h6></td>
+              <td  class="text-center" align="center"><h6 class="m-0"> <small>Order Recevied</small></h6></td>
               
           </tr> 
           <tr>
-              <td  align="center"><small>Amount:</small></td>
+              <td  align="center"><small>Total Bill:</small></td>
               <td  class="text-center" align="center">
               <?php 
                 if($total_order_amount<99){ $total_order_amount += 10;}else if($total_order_amount>100){ }

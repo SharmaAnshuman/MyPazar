@@ -24,7 +24,6 @@ class Myaccount extends CI_Controller{
             //View
             $this->load->view('include/navbar',$data);
             $this->load->view('myaccount',$data);
-            $this->load->view('include/footer');            
         }else{
             //Page
             $data['pageTitle'] = 'Login';
@@ -33,9 +32,9 @@ class Myaccount extends CI_Controller{
             //View
             $this->load->view('include/navbar',$data);
             $this->load->view('auth',$data);
-            $this->load->view('include/footer');
         }
 
+        $this->load->view('include/footer');
     }
 
     function login(){
@@ -55,6 +54,7 @@ class Myaccount extends CI_Controller{
                         $this->load->model('Order');
                         if($this->Order->update_g2u_order($order_id,$this->session->userdata('guset_UID'),$result[0]->id)){
                             $this->session->unset_userdata("guset_UID");
+                            $this->Users->send_verification();
                             redirect(base_url('home/cart'));
                         }else{
                             $this->error = "G2U update error";
@@ -66,6 +66,35 @@ class Myaccount extends CI_Controller{
             }
         }
         redirect(base_url('home'));
+    }
+
+    function forget(){
+        
+        $this->load->model("Users");
+
+        if($this->input->post('btn_forget')){
+
+           $mobile = $this->input->post('mobile');
+           $email  = $this->input->post('email');
+
+           if((isset($mobile)) && (isset($email)))
+           {
+                if($Users->forget_user_password($mobile,$email))
+                    $data['error'] = "Password send to your registed mobile number!";
+                else
+                    $data['error'] = "Your details not found!";
+           }
+           else
+                $data['error'] = "Please enter all details to forget password..";
+        }
+        else
+            $data['error'] = "Enter your registerd mobile and email!";
+
+        $data['pageTitle'] = "Forget";
+        $this->load->view('include/navbar',$data);
+        $this->load->view('forget',$data);
+        $this->load->view('include/footer',$data);
+
     }
 
     function order(){
@@ -100,20 +129,17 @@ class Myaccount extends CI_Controller{
                             $this->Users->update_address($UID,$AID);
                             if($this->Order->make_order($order_id,$UID)){
                                 $this->load->model('Order');
-                                
                                 $data['pageTitle'] = "Thank you";
                                 $data['error'] = "you can get all order details from my account";
-
-                                $this->load->view('include/navbar',$data);
-                                $this->load->view('thankyou',$data);
-                                $this->load->view('include/footer',$data);
                             }else{
                                 $data['pageTitle'] = "Opps";
                                 $data['error'] = "Opps Your Order Not Confim...";
-                                $this->load->view('include/navbar',$data);
-                                $this->load->view('thankyou',$data);
-                                $this->load->view('include/footer',$data);
                             }
+
+                            $this->load->view('include/navbar',$data);
+                            $this->load->view('thankyou',$data);
+                            $this->load->view('include/footer',$data);
+                            
                             $order_id = null;
                             $this->session->unset_userdata("order_id");
                     }
@@ -125,16 +151,15 @@ class Myaccount extends CI_Controller{
                 if($this->Order->make_order($order_id,$user->id)){
                     $data['error'] = $user->name." your order has been placed!";
                     $data['pageTitle'] = "Thank you ".$user->name;
-                    $this->load->view('include/navbar',$data);
-                    $this->load->view('thankyou',$data);
-                    $this->load->view('include/footer',$data);
                 }else{
                     $data['pageTitle'] = "Opps";
                     $data['error'] = "Opps Your Order Not Confim...";
-                    $this->load->view('include/navbar',$data);
-                    $this->load->view('thankyou',$data);
-                    $this->load->view('include/footer',$data);
                 }
+
+                $this->load->view('include/navbar',$data);
+                $this->load->view('thankyou',$data);
+                $this->load->view('include/footer',$data);
+
                 $order_id = null;
                 $this->session->unset_userdata("order_id");
             }            

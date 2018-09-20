@@ -116,26 +116,56 @@ class Order extends CI_Model {
 
     function update_g2u_order($order_id,$guset_UID,$UID){
 
-        $data = array(
-            'UID' => $UID,
-        );
-        $where = array(
-            'order_id' => $order_id,
-            'UID' => $guset_UID,
-            'status' => "incart",
-        );
-        $this->db->where($where);
-        if($this->db->update('myorder', $data)){
-            return true;
-        }else{
-            return false;
+        $token = null;
+
+        // deleting old item from cart of same user if item get repeted, acepeting new one
+        $query = $this->db->query("SELECT * FROM `myorder` WHERE `UID` = '$guset_UID' and `order_id` = '$order_id' and `status`='incart' ");
+        if($query->num_rows() == 1)
+        {
+            $result = $query->result();
+            foreach ($result as $item) {
+                $id_of_cart = check_item_added_on_past($UID,$item->VID);
+                if($id_of_cart){
+                    echo "delete from `myorder` where id = $id_of_cart->id ";
+                    if($this->db->query("delete from `myorder` where id = '$id_of_cart->id' ")){
+                        $token = 0;
+                    }else{
+                        $token = 1;
+                    }
+                }
+            }
         }
+
+
+        // update cart guset -> login user
+        if($token != 1){
+
+            $data = array(
+                'UID' => $UID,
+            );
+
+            $where = array(
+                'order_id' => $order_id,
+                'UID' => $guset_UID,
+                'status' => "incart",
+            );
+
+            $this->db->where($where);
+            if($this->db->update('myorder', $data))
+                return true;
+            else
+                return false;
+        }else
+            return false;    
     }
 
-    function check_item_already_added($UID){
-        $query = $this->db->query("SELECT * FROM `myorder` WHERE UID = '$UID' and status = 'incart' ");
-        $result = $query->result();
-
+    function check_item_added_on_past($UID,$VID){
+        $query = $this->db->query("SELECT * FROM `myorder` WHERE UID = '$UID' and VID = '$VID' and status = '$status' ");
+        if($query->num_rows() == 1){
+            return $query->result()[0];
+        }else{
+            return FALSE;
+        }
     }
 
 }   

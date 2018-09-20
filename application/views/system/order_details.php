@@ -36,14 +36,14 @@
 			<td>9747518981</td>
 			<td>235.82</td>
 			<td>UnPaid</td>
-			<td>UnDeliverd</td>
+			<td>UnDeliverd<a class="btn btn-sm btn-danger" href="">Delivery</a></td>
 		</tr>
 		<tr>
 			<td>2</td>
 			<td>9497717306</td>
 			<td>89.25</td>
 			<td>UnPaid</td>
-			<td>UnDeliverd</td>
+			<td>UnDeliverd<a class="btn btn-sm btn-danger" href="">Delivery</a></td>
 		</tr>
 	</tbody>
 </table>

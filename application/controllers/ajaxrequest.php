@@ -208,6 +208,11 @@ class Ajaxrequest extends CI_Controller{
             return $output;
     }
 
+    function get_full_payment(){
+
+
+    }
+
     function add_vegetable_price($arg,$price_pre_qty){
         $this->load->model('Price');
         $arg = explode("_",$arg);

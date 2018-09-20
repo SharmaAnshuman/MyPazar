@@ -6,11 +6,8 @@ class Payment extends CI_Model {
         parent::__construct();
     }
 
-    function get_pendding_bills(){
-
-    }
-
-    function make_payment(){
-        
+    function full_payment_details(){
+    	$query = $this->db->query("SELECT * FROM `users`,`myorder`,`payment` where users.id = myorder.uid and payment.uid = users.id and myorder.uid = payment.uid");
+    	return $query->result();
     }
 }   

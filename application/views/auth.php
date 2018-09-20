@@ -9,4 +9,5 @@
     <input type="password" id="password" name="password" class="form-control" placeholder="Password" value="ashu">
   </div>
   <button type="submit" class="btn btn-primary" name="btn_signin" value="User Login">Sign in</button>
+  <a class="btn btn-primary btn-link" href="<?= base_url('myaccount/forget')?>">Forget Password</button>
 </form>

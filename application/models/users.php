@@ -98,15 +98,32 @@ class Users extends CI_Model {
 
     }
 
-    function update_user_password(){
+    function forget_user_password($mobile,$email){
+
+        if($mobile != "")
+        {
+            $query = $this->db->query("select * from users where  `mobile` = '$mobile' and `email` = '$email' ");
+            if($query->num_rows() == 1){
+                return false; // already register mobile
+            }else{
+                return true; // new mobile num
+            }
+        }
+        return false;
 
     }
 
-    function send_verification_mail($email){
+    function send_verification($type="EMAIL"){
 
-    }
+        $UID = $this->session->userdata("userData")[0]->id;
+        $query = $this->db->query("select * from `users` where `UID`= $UID");
 
-    function send_verification_sms(){
+        if($type == "EMAIL"){
+            $email = $query->result()[0]->email;
+
+        }else if($type == "SMS"){
+            $mobile = $query->result()[0]->mobile;
+        }
 
     }
 }   
