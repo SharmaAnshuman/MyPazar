@@ -43,7 +43,7 @@ class Myaccount extends CI_Controller{
         $user = $this->input->post('username');
         $pass = $this->input->post('password');
         $btn = $this->input->post('btn_signin');
-        if($btn != "Guset Login"){
+        if($btn == "User Login"){
             # Vaildation Of Request
             $this->load->model('Users');
             if($user != "" && $pass != ""){
@@ -53,34 +53,22 @@ class Myaccount extends CI_Controller{
                     $order_id = $this->session->userdata("order_id");
                     if($order_id){
                         $this->load->model('Order');
-                        if($this->Order->update_g2u_id($order_id,$this->session->userdata('guset_UID'),$result[0]->id)){
+                        if($this->Order->update_g2u_order($order_id,$this->session->userdata('guset_UID'),$result[0]->id)){
                             $this->session->unset_userdata("guset_UID");
-                            redirect(base_url('myaccount/guset_order'));
+                            redirect(base_url('home/cart'));
                         }else{
                             $this->error = "G2U update error";
                         }
                     }
-                    redirect(base_url('home'));
                 }else{
-                    $this->error="Login Failed...";
+                    $this->error="Please enter all details..";
                 }
             }
-        }else{
-
-            //Page
-            $data['pageTitle'] = 'Guset Login';
-            $data['error'] = $this->error;
-
-            //View
-            $this->load->view('include/navbar',$data);
-            $this->load->view('guset_login',$data);
-            $this->load->view('include/footer');   
-
         }
         redirect(base_url('home'));
     }
 
-    function guset_order(){
+    function order(){
 
         $name = $this->input->post('name');
         $email = $this->input->post('email');
@@ -153,6 +141,7 @@ class Myaccount extends CI_Controller{
         }else{
             redirect(base_url('home'));
         }
+        redirect(base_url('home'));
     }
 
     function logout(){

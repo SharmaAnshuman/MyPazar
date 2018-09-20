@@ -29,9 +29,9 @@ class Desk extends CI_Controller{
     function system_login(){
         $system_token = $this->input->post("desk_token");
         $m_mode = $this->input->post("m_mode");
-        if($system_token == "admin"){
+        if($system_token == "9722505034"){
             $this->session->set_userdata("desk",true);
-            if($m_mode == "true"){
+            if($m_mode == "on"){
                 $config['maintenance_mode']= TRUE;
             }
             redirect(base_url('desk'));

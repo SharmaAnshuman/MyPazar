@@ -1,8 +1,26 @@
 body {
+  color: #fff;
+  min-height:-webkit-fill-available;
+  background-color: #eb87cdc7;
+  background-image: rgba(235,235,235,1);
+  background-image: -webkit-linear-gradient(120deg, #eb87cdc7 0%,#00ffe575 100%);
+  background-image: -moz-linear-gradient(120deg, #eb87cdc7 0%,#00ffe575 100%);
+  background-image: -o-linear-gradient(120deg, #eb87cdc7 0%,#00ffe575 100%);
+  background-image: -ms-linear-gradient(120deg, #eb87cdc7 0%,#00ffe575 100%);
+  background-image: linear-gradient(120deg, #eb87cdc7 0%,#00ffe575 100%);
+  -webkit-box-shadow: rgba(128,128,128,1) 0px 0px 0px 0px, inset rgba(255,255,255,1) 0px 0px 0px 0px;
+  -moz-box-shadow: rgba(128,128,128,1) 0px 0px 0px 0px, inset rgba(255,255,255,1) 0px 0px 0px 0px;
+  box-shadow: rgba(128,128,128,1) 0px 0px 0px 0px, inset rgba(255,255,255,1) 0px 0px 0px 0px;
+  background-attachment:fixed;
+/*  background-size: auto 100%;*/
+  background-repeat: no-repeat;
+}
+
+/*body {
   color: #fff;  
   background-image:linear-gradient(120deg, #eb87cdc7 0%, #00ffe575 100%);
   min-height:-webkit-fill-available;
-}
+}*/
 .fixed-brand{
     position: fixed;
     z-index: 1030;

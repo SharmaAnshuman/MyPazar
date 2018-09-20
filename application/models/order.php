@@ -114,13 +114,15 @@ class Order extends CI_Model {
 
     }
 
-    function update_g2u_id($order_id,$guset_UID,$UID){
+    function update_g2u_order($order_id,$guset_UID,$UID){
+
         $data = array(
             'UID' => $UID,
         );
         $where = array(
             'order_id' => $order_id,
             'UID' => $guset_UID,
+            'status' => "incart",
         );
         $this->db->where($where);
         if($this->db->update('myorder', $data)){
@@ -128,6 +130,12 @@ class Order extends CI_Model {
         }else{
             return false;
         }
+    }
+
+    function check_item_already_added($UID){
+        $query = $this->db->query("SELECT * FROM `myorder` WHERE UID = '$UID' and status = 'incart' ");
+        $result = $query->result();
+
     }
 
 }   

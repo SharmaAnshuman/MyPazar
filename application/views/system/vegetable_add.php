@@ -33,7 +33,7 @@
             // });
           $currentTR = $parentAction.parent();
           $currentTR = $parentAction.parent().remove();
-        }
+        });
       }else{ return false; }
     }else if($action_name == "Save"){
       $actionTarget.addClass("disabled");
@@ -67,6 +67,7 @@
       alert("Update Not Saved!");
     }
   }
+}
 </script>
 <div id="process_window" class="d-none">
   <img src="https://loading.io/spinners/lava-lamp/lg.lava-lamp-preloader.gif" id="process_img" class="process_img">
