@@ -53,6 +53,19 @@ class Order extends CI_Model {
         return $query->result();
     }
 
+    function get_myorder(){
+        
+        $userdata = $this->session->userdata("userData")[0];
+        if(isset($userdata->id)){
+            $UID = $userdata->id;
+        }else{
+            $UID = $this->session->userdata("guset_UID");
+        }
+        $query = $this->db->query("SELECT * FROM `myorder`,`vegetables`,`price` WHERE  price.VID = vegetables.id and myorder.VID = vegetables.id and myorder.status = 'incart' and myorder.UID = '".$UID."'"); 
+        return $query->result();        
+        
+    }
+
     function get_update_token($order_id,$UID,$VID){
         # Ajax Req.
 
@@ -120,13 +133,12 @@ class Order extends CI_Model {
 
         // deleting old item from cart of same user if item get repeted, acepeting new one
         $query = $this->db->query("SELECT * FROM `myorder` WHERE `UID` = '$guset_UID' and `order_id` = '$order_id' and `status`='incart' ");
-        if($query->num_rows() == 1)
+        $result = $query->result();
+        if($result)
         {
-            $result = $query->result();
             foreach ($result as $item) {
-                $id_of_cart = check_item_added_on_past($UID,$item->VID);
+                $id_of_cart = $this->check_item_added_on_past($UID,$item->VID)[0];
                 if($id_of_cart){
-                    echo "delete from `myorder` where id = $id_of_cart->id ";
                     if($this->db->query("delete from `myorder` where id = '$id_of_cart->id' ")){
                         $token = 0;
                     }else{
@@ -160,9 +172,24 @@ class Order extends CI_Model {
     }
 
     function check_item_added_on_past($UID,$VID){
-        $query = $this->db->query("SELECT * FROM `myorder` WHERE UID = '$UID' and VID = '$VID' and status = '$status' ");
-        if($query->num_rows() == 1){
-            return $query->result()[0];
+        $query = $this->db->query("SELECT * FROM `myorder` WHERE UID = '$UID' and VID = '$VID' and status = 'incart' ");
+        $result = $query->result();
+        if($result){
+            return $result;
+        }else{
+            return FALSE;
+        }
+    }
+
+    function get_orders($where,$value){
+        if($where == "mobile"){
+            $query = $this->db->query("SELECT *,`order_id` FROM `myorder` WHERE UID = (select id from users where mobile = '$value') and status = 'Order' GROUP BY `order_id`");
+        }else if($where == "order_id"){
+            $query = $this->db->query("SELECT *,`order_id` FROM `myorder` WHERE order_id = '$value' and status = 'Order' GROUP BY `order_id`");
+        }
+        $result = $query->result();
+        if($result){
+            return $result;
         }else{
             return FALSE;
         }

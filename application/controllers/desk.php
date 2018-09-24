@@ -91,7 +91,13 @@ class Desk extends CI_Controller{
 
     //  P A Y M E N T
     function check_payment(){
-		echo "Check payment";
+		 // Page
+        $data['pageTitle'] = 'Vegetable Price';
+        
+        // View
+        $this->load->view('include/navbar',$data);
+        $this->load->view('system/payment',$data);
+        $this->load->view('include/footer',$data);
     }
 
     function paid_bills(){

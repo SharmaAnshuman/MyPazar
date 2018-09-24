@@ -109,7 +109,7 @@
 if($error){ echo "<span class='alert alert-denger' id='error'>$error</span>"; }
 ?>
 <p class="ml-4 mb-0">already have account <a href="<?= base_url('myaccount')?>">Login</a></p>
-<form class="p-4" action="<?php echo base_url('myaccount/guset_order'); ?>" method="POST" id="userDetailsForm">
+<form class="p-4" action="<?php echo base_url('myaccount/order'); ?>" method="POST" id="userDetailsForm">
   <div class="form-group">
   	<label for="name">Full Name</label>
     <input type="text" id="name" name="name" class="form-control" placeholder="Full Name">

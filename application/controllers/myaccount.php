@@ -166,7 +166,6 @@ class Myaccount extends CI_Controller{
         }else{
             redirect(base_url('home'));
         }
-        redirect(base_url('home'));
     }
 
     function logout(){
@@ -184,10 +183,10 @@ class Myaccount extends CI_Controller{
         return $randomString;
     }
 
-    function orders(){
+    function order_details(){
 
-        $this->load->model('Myorder');
-        $result = $this->Myorder->get_order_info();
+        $this->load->model('Order');
+        $result = $this->Order->get_myorder();
 
         $data['pageTitle'] = "Thank you";
         $data['orders'] = $result;

@@ -9,6 +9,7 @@ class Users extends CI_Model {
     var $type = null;
     var $verified = "N";
     var $AID = 0;
+    var $token = "";
 
     function __construct()
     {
@@ -58,6 +59,8 @@ class Users extends CI_Model {
         $this->email = $email;
         $this->mobile = $mobile;
         $this->username = $mobile;
+        $this->token = $this->generateRandomString(5);
+
 
         $result = $this->db->insert('users', $this);
         if($result){
@@ -116,7 +119,7 @@ class Users extends CI_Model {
     function send_verification($type="EMAIL"){
 
         $UID = $this->session->userdata("userData")[0]->id;
-        $query = $this->db->query("select * from `users` where `UID`= $UID");
+        $query = $this->db->query("select * from `users` where `id`= $UID");
 
         if($type == "EMAIL"){
             $email = $query->result()[0]->email;
@@ -125,5 +128,29 @@ class Users extends CI_Model {
             $mobile = $query->result()[0]->mobile;
         }
 
+    }
+
+    function generateRandomString($length = 4) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
+
+    function app_login($token){
+
+        if($token != "")
+        {
+            $query = $this->db->query("select * from users where  `token` = '$token'");
+            if($query->num_rows() == 1){
+                return $query->result();
+            }else{
+                return false;
+            }
+        }
+        return false;
     }
 }   

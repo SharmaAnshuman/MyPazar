@@ -26,6 +26,7 @@ class Address extends CI_Model {
         $data = array(
             'UID' => $uid ,
             'address' => $address,
+            'house_name'=>'-',
             'lat' => $lat,
             'lng' => $lng,
             'is_active'=> 'Y',

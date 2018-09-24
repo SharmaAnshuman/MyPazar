@@ -27,20 +27,17 @@ $this->session->unset_userdata("order_id");
   </script>
 
       <div id="print" style="background: linear-gradient(127deg, #eb87cdc7,#00ffe575);">
-        <table align="center" >
+        <table align="center">
           <tr>
               <th colspan="2">
                 <h1><img src="<?php echo base_url("assets/src/img/logo.svg"); ?>" id="brandName" width="35" height="35"> Order <small>Details</small></h1>
-                <center><small>Order ID: <strong><?= $order_id ?></strong></small></center>
+                <center><small>Order ID:</small> <?= $order_id ?></center>
               </th>
-          </tr>
-          <tr>
-              <td colspan="2"><hr/></td>
           </tr>
           <tr>
               <td  class="text-center" align="center" colspan="2">
               	<div class="m-0">
-                  <table class="m-0">
+                  <table class="table">
               		<?php foreach ($order as $item): ?>
                     <tr>
   	              	  <td><?= $item->name ?></td>  

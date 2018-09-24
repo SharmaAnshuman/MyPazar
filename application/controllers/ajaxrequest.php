@@ -247,4 +247,40 @@ class Ajaxrequest extends CI_Controller{
         }
     }
 
+    function get_user_orders($mobile){
+        $this->load->model('Order');
+        $result =  $this->Order->get_orders("mobile",$mobile);
+        if($result){
+            echo "<option>Select Order</option>";
+            foreach ($result as $orders) {
+                echo "<option value='".$orders->order_id."'>$orders->order_id $orders->created_at </option>";
+            }
+        }
+    }
+
+    function get_order_details($order_id){
+        $this->load->model('Order');
+        $result =  $this->Order->get_orders("order_id",$order_id);
+        if($result){
+            foreach ($result as $orders) {
+                ?>
+                <label>Total Bill</label>
+                <p id='total_amount' class="m-0 alert alert-success">Total Rs. <?= $orders->id; ?></p>
+                <label>Already paid</label>
+                <input type="text" class="form-control disabled text-success" disabled="" name="paid_amount" value="Rs.<?= "2" ?> Already Paid">
+                <label>Unpaid</label>
+                <input type="text" class="form-control disabled text-danger" disabled="" name="unpaid_amount" value="Rs.<?= "2" ?> UnPaid">
+                <label>Pay Now</label>
+                <div class="input-group">
+                  <input type="number" class="form-control" name="collected_amount" placeholder="Collecting Amount..">
+                    <div class="input-group-append">
+                      <button id="btn_add_money_to_bill" class="btn btn-sm btn-outline-secondary" onclick="">Collect & Update Bill</button>
+                    </div>
+                </div>
+                <?php
+                //echo "<option value='".$orders->order_id."'>$orders->order_id $orders->created_at </option>";
+            }
+        }
+    }   
+
 }
